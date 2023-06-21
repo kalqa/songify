@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 public class SongsController {
 
-    Map<Integer, String> database = new HashMap<>();
+    Map<Integer, String> database = new HashMap<>(Map.of(
+            1, "shawnmendes song1",
+            2, "ariana grande song2",
+            3, "ariana grande song21123123",
+            4, "ariana grande song12312314345cbvbcvb"
+    ));
 
     @GetMapping("/songs")
     public ResponseEntity<SongResponseDto> getAllSongs(@RequestParam(required = false) Integer limit) {
-        database.put(1, "shawnmendes song1");
-        database.put(2, "ariana grande song2");
-        database.put(3, "ariana grande song21123123");
-        database.put(4, "ariana grande song12312314345cbvbcvb");
         if (limit != null) {
             Map<Integer, String> limitedMap = database.entrySet()
                     .stream()
