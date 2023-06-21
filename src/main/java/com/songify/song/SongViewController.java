@@ -1,4 +1,4 @@
-package com.songify;
+package com.songify.song;
 
 import java.util.HashMap;
 import java.util.Map;

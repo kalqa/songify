@@ -1,4 +1,4 @@
-package com.songify;
+package com.songify.song;
 
 import jakarta.validation.Valid;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Log4j2
-public class SongsController {
+public class SongRestController {
 
     Map<Integer, String> database = new HashMap<>(Map.of(
             1, "shawnmendes song1",
