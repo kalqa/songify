@@ -1,6 +1,6 @@
 package com.songify.apivalidation;
 
-import com.songify.song.SongRestController;
+import com.songify.song.controller.SongRestController;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
