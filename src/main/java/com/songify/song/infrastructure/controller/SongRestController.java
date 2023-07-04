@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Log4j2
@@ -36,10 +37,12 @@ public class SongRestController {
 
     private final SongAdder songAdder;
     private final SongRetriever songRetriever;
+    private final ArtistSaver artistSaver;
 
-    SongRestController(SongAdder songAdder, SongRetriever songRetriever) {
+    SongRestController(SongAdder songAdder, SongRetriever songRetriever, ArtistSaver artistSaver) {
         this.songAdder = songAdder;
         this.songRetriever = songRetriever;
+        this.artistSaver = artistSaver;
     }
 
     @GetMapping
@@ -69,6 +72,13 @@ public class SongRestController {
     @PostMapping
     public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
         Song song = SongMapper.mapFromCreateSongRequestDtoToSong(request);
+
+
+        artistSaver.addArtist(song.artist());
+        artistSaver.printArtists();
+        artistSaver.printArtistsSize();
+        artistSaver.printSaverName();
+
         songAdder.addSong(song);
         CreateSongResponseDto body = SongMapper.mapFromSongToCreateSongResponseDto(song);
         return ResponseEntity.ok(body);
