@@ -1,26 +1,29 @@
 package com.songify.song.domain.repository;
 
 import com.songify.song.domain.model.Song;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 
-@Repository
-public class SongRepository {
+import java.util.List;
+import java.util.Optional;
 
-    Map<Integer, Song> database = new HashMap<>(Map.of(
-            1, new Song("shawnmendes song1", "Shawn Mendes"),
-            2, new Song("ariana grande song2", "Ariana Grande"),
-            3, new Song("ariana grande song21123123", "Ariana Grande"),
-            4, new Song("ariana grande song12312314345cbvbcvb", "Ariana Grande")
-    ));
+public interface SongRepository extends Repository<Song, Long> {
 
-    public Song saveToDatabase(Song song) {
-        database.put(database.size() + 1, song);
-        return song;
-    }
+    Song save(Song song);
 
-    public Map<Integer, Song> findAll() {
-        return database;
-    }
+    @Query("SELECT s FROM Song s WHERE s.id =:id")
+    Optional<Song> findById(Long id);
+
+    @Modifying
+    @Query("DELETE FROM Song s WHERE s.id = :id")
+    void deleteById(Long id);
+
+    @Modifying
+    @Query("UPDATE Song s SET s.name = :#{#newSong.name}, s.artist = :#{#newSong.artist} WHERE s.id = :id")
+    void updateById(Long id, Song newSong);
+
+    @Query("SELECT s FROM Song s")
+    List<Song> findAll(Pageable pageable);
 }
