@@ -22,18 +22,18 @@ public class SongUpdater {
         log.info("Updated song with id: " + id);
     }
 
-    public void patchById(Song songFromDatabase, Song updatedSong) {
-        Song.SongBuilder builder = Song.builder();
-        if (updatedSong.getName() != null) {
-            builder.name(updatedSong.getName());
-        } else {
-            builder.name(songFromDatabase.getName());
-        }
-        if (updatedSong.getArtist() != null) {
-            builder.artist(updatedSong.getArtist());
-        } else {
-            builder.artist(songFromDatabase.getArtist());
-        }
-        updateById(songFromDatabase.getId(), builder.build());
-    }
+//    public void patchById(Song songFromDatabase, Song updatedSong) {
+//        Song.SongBuilder builder = Song.builder();
+//        if (updatedSong.getName() != null) {
+//            builder.name(updatedSong.getName());
+//        } else {
+//            builder.name(songFromDatabase.getName());
+//        }
+//        if (updatedSong.getArtistsSongs() != null) {
+//            builder.artist(updatedSong.getArtist());
+//        } else {
+//            builder.artist(songFromDatabase.getArtist());
+//        }
+//        updateById(songFromDatabase.getId(), builder.build());
+//    }
 }

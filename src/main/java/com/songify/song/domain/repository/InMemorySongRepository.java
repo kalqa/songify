@@ -1,22 +1,28 @@
 package com.songify.song.domain.repository;
 
+import com.songify.song.domain.model.Artist;
 import com.songify.song.domain.model.Song;
 import org.springframework.data.domain.Pageable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 public class InMemorySongRepository implements SongRepository {
 
-    Map<Long, Song> database = new HashMap<>(Map.of(
-            1L, new Song("shawnmendes song1", "Shawn Mendes"),
-            2L, new Song("ariana grande song2", "Ariana Grande"),
-            3L, new Song("ariana grande song21123123", "Ariana Grande"),
-            4L, new Song("ariana grande song12312314345cbvbcvb", "Ariana Grande")
-    ));
+    Map<Long, Song> database;
+
+    InMemorySongRepository() {
+        Song song1 = new Song("shawnmendes song1", Collections.emptySet());
+        Song song2 = new Song("ariana grande song2 feat. Shawn Mendes", Collections.emptySet());
+        Artist artist1 = new Artist(1L, "Shawn Mendes", Collections.emptySet());
+        Artist artist2 = new Artist(2L, "Ariana Grande", Collections.emptySet());
+        song1.setArtistsSongs(Set.of(artist1));
+        song2.setArtistsSongs(Set.of(artist1, artist2));
+        database = new HashMap<>(Map.of(
+                1L, song1,
+                2L, song2
+        ));
+    }
 
     public Song saveToDatabase(Song song) {
         database.put(database.size() + 1L, song);

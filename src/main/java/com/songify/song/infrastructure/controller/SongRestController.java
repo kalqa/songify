@@ -77,15 +77,15 @@ public class SongRestController {
         return ResponseEntity.ok(body);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<PartiallyUpdateSongResponseDto> partiallyUpdateSong(@PathVariable Long id,
-                                                                              @RequestBody PartiallyUpdateSongRequestDto request) {
-
-        Song songFromDatabase = songRetriever.findById(id)
-                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
-        Song updatedSong = SongMapper.mapFromPartiallyUpdateSongRequestDtoToSong(request);
-        songUpdater.patchById(songFromDatabase, updatedSong);
-        PartiallyUpdateSongResponseDto body = SongMapper.mapFromSongToPartiallyUpdateSongResponseDto(updatedSong);
-        return ResponseEntity.ok(body);
-    }
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<PartiallyUpdateSongResponseDto> partiallyUpdateSong(@PathVariable Long id,
+//                                                                              @RequestBody PartiallyUpdateSongRequestDto request) {
+//
+//        Song songFromDatabase = songRetriever.findById(id)
+//                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
+//        Song updatedSong = SongMapper.mapFromPartiallyUpdateSongRequestDtoToSong(request);
+//        songUpdater.patchById(songFromDatabase, updatedSong);
+//        PartiallyUpdateSongResponseDto body = SongMapper.mapFromSongToPartiallyUpdateSongResponseDto(updatedSong);
+//        return ResponseEntity.ok(body);
+//    }
 }
