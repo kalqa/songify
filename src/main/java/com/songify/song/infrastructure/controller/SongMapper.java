@@ -32,7 +32,7 @@ public class SongMapper {
     }
 
     public static UpdateSongResponseDto mapFromSongToUpdateSongResponseDto(Song newSong) {
-        return new UpdateSongResponseDto(newSong.name(), newSong.artist());
+        return new UpdateSongResponseDto(newSong.getName(), newSong.getArtist());
     }
 
     public static PartiallyUpdateSongResponseDto mapFromSongToPartiallyUpdateSongResponseDto(Song updatedSong) {
