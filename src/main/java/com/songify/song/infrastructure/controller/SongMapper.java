@@ -4,14 +4,10 @@ import com.songify.song.domain.model.Song;
 import com.songify.song.infrastructure.controller.dto.request.CreateSongRequestDto;
 import com.songify.song.infrastructure.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songify.song.infrastructure.controller.dto.request.UpdateSongRequestDto;
-import com.songify.song.infrastructure.controller.dto.response.CreateSongResponseDto;
-import com.songify.song.infrastructure.controller.dto.response.DeleteSongResponseDto;
-import com.songify.song.infrastructure.controller.dto.response.GetAllSongsResponseDto;
-import com.songify.song.infrastructure.controller.dto.response.GetSongResponseDto;
-import com.songify.song.infrastructure.controller.dto.response.PartiallyUpdateSongResponseDto;
-import com.songify.song.infrastructure.controller.dto.response.UpdateSongResponseDto;
-import java.util.Map;
+import com.songify.song.infrastructure.controller.dto.response.*;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 public class SongMapper {
 
@@ -47,7 +43,7 @@ public class SongMapper {
         return new GetSongResponseDto(song);
     }
 
-    public static GetAllSongsResponseDto mapFromSongToGetAllSongsResponseDto(Map<Integer, Song> database) {
+    public static GetAllSongsResponseDto mapFromSongToGetAllSongsResponseDto(List<Song> database) {
         return new GetAllSongsResponseDto(database);
     }
 }
