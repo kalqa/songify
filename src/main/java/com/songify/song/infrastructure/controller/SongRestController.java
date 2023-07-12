@@ -41,13 +41,10 @@ public class SongRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetSongResponseDto> getSongById(@PathVariable Integer id, @RequestHeader(required = false) String requestId) {
+    public ResponseEntity<GetSongResponseDto> getSongById(@PathVariable Long id, @RequestHeader(required = false) String requestId) {
         log.info(requestId);
-        List<Song> allSongs = songRetriever.findAll();
-        if (!allSongs.contains(id)) {
-            throw new SongNotFoundException("Song with id " + id + " not found");
-        }
-        Song song = allSongs.get(id);
+        Song song = songRetriever.findSongById(id)
+                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
         GetSongResponseDto response = SongMapper.mapFromSongToGetSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
