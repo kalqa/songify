@@ -14,4 +14,6 @@ public interface SongRepository extends Repository<Song, Long> {
 
     Optional<Song> findById(Long id);
 
+    void deleteById(Long id);
+
 }
