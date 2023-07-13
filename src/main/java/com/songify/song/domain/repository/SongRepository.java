@@ -1,6 +1,7 @@
 package com.songify.song.domain.repository;
 
 import com.songify.song.domain.model.Song;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -11,7 +12,7 @@ import java.util.Optional;
 public interface SongRepository extends Repository<Song, Long> {
 
     @Query("SELECT s FROM Song s")
-    List<Song> findAll();
+    List<Song> findAll(Pageable pageable);
 
     @Query("SELECT s FROM Song s WHERE s.id =:id")
     Optional<Song> findById(Long id);
