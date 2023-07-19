@@ -2,7 +2,7 @@ package com.songify.song.domain.service;
 
 import com.songify.song.domain.model.Song;
 import com.songify.song.domain.repository.SongRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 

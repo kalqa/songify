@@ -71,6 +71,11 @@ public class SongRestController {
         return ResponseEntity.ok(body);
     }
 
+    @PutMapping("/dumb")
+    public void update() {
+        songUpdater.someComplicatedLogic();
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<PartiallyUpdateSongResponseDto> partiallyUpdateSong(@PathVariable Long id,
                                                                               @RequestBody PartiallyUpdateSongRequestDto request) {
