@@ -32,11 +32,12 @@ public class SongUpdater {
         } else {
             builder.name(songFromDatabase.getName());
         }
-        if (songFromRequest.getArtist() != null) {
-            builder.artist(songFromRequest.getArtist());
-        } else {
-            builder.artist(songFromDatabase.getArtist());
-        }
+        // todo
+//        if (songFromRequest.getArtist() != null) {
+//            builder.artist(songFromRequest.getArtist());
+//        } else {
+//            builder.artist(songFromDatabase.getArtist());
+//        }
         Song toSave = builder.build();
         updateById(id, toSave);
         return toSave;

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Builder
 @Getter
 @Entity
@@ -19,21 +21,44 @@ public class Song {
     @Column(nullable = false)
     String name;
 
-    @Column(nullable = false)
-    String artist;
+//    @OneToMany
+//    @JoinTable(
+//            joinColumns = { @JoinColumn(name = "song_id")},
+//            inverseJoinColumns = { @JoinColumn(name = "artist_id")}
+//    )
+    @OneToMany
+    Set<Artist> artists;
 
     public Song() {
 
     }
 
-    public Song(String name, String artist) {
+    public Song(String name, Set<Artist> artists) {
         this.name = name;
-        this.artist = artist;
+        this.artists = artists;
     }
 
-    public Song(Long id, String name, String artist) {
+    public Song(Long id, String name, Set<Artist> artists) {
         this.id = id;
         this.name = name;
-        this.artist = artist;
+        this.artists = artists;
     }
+
+    //    public Song(String name, String artist) {
+//        this.name = name;
+//        this.artist = artist;
+//    }
+//
+//    public Song(Long id, String name, String artist) {
+//        this.id = id;
+//        this.name = name;
+//        this.artist = artist;
+//    }
+
+//    public Song(Long id, String name, String artist, Set<Artist> artists) {
+//        this.id = id;
+//        this.name = name;
+//        this.artist = artist;
+//        this.artists = artists;
+//    }
 }
