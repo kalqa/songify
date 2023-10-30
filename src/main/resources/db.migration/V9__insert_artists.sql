@@ -1,0 +1,46 @@
+INSERT INTO artist (name)
+VALUES
+    ('Ariana Grande'),
+    ('Ed Sheeran'),
+    ('Taylor Swift'),
+    ('Beyoncé'),
+    ('The Weeknd'),
+    ('Drake'),
+    ('Adele'),
+    ('Billie Eilish'),
+    ('Justin Bieber'),
+    ('Dua Lipa'),
+    ('Coldplay'),
+    ('Kendrick Lamar'),
+    ('Katy Perry'),
+    ('Bruno Mars'),
+    ('Rihanna'),
+    ('Eminem'),
+    ('Lady Gaga'),
+    ('Post Malone'),
+    ('Nicki Minaj'),
+    ('Bob Dylan');
+--
+--
+-- INSERT INTO artist (id, name)
+-- VALUES
+--     (1, 'Ariana Grande'),
+--     (2, 'Ed Sheeran'),
+--     (3, 'Taylor Swift'),
+--     (4, 'Beyoncé'),
+--     (5, 'The Weeknd'),
+--     (6, 'Drake'),
+--     (7, 'Adele'),
+--     (8, 'Billie Eilish'),
+--     (9, 'Justin Bieber'),
+--     (10, 'Dua Lipa'),
+--     (11, 'Coldplay'),
+--     (12, 'Kendrick Lamar'),
+--     (13, 'Katy Perry'),
+--     (14, 'Bruno Mars'),
+--     (15, 'Rihanna'),
+--     (16, 'Eminem'),
+--     (17, 'Lady Gaga'),
+--     (18, 'Post Malone'),
+--     (19, 'Nicki Minaj'),
+--     (20, 'Bob Dylan');

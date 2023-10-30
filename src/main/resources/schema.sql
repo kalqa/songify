@@ -1,9 +1,46 @@
-DROP TABLE song;
-
-CREATE TABLE IF NOT EXISTS song
-(
-    id     BIGSERIAL    PRIMARY KEY,
-    artist VARCHAR(255) NOT NULL,
-    name   VARCHAR(255) NOT NULL
-);
-
+-- -- DROP TABLE IF EXISTS song CASCADE;
+-- DROP TABLE IF EXISTS genre CASCADE;
+-- DROP TABLE IF EXISTS artist CASCADE;
+-- DROP TABLE IF EXISTS album CASCADE;
+-- DROP TABLE IF EXISTS artist_albums CASCADE;
+--
+-- --
+-- -- -- Table for Artists
+-- -- CREATE TABLE artist
+-- -- (
+-- --     id   BIGSERIAL PRIMARY KEY,
+-- --     name VARCHAR(255) COLLATE "C" NOT NULL UNIQUE
+-- -- );
+--
+-- -- Table for Genres
+-- -- CREATE TABLE genre
+-- -- (
+-- --     id   BIGSERIAL PRIMARY KEY,
+-- --     name VARCHAR(255) NOT NULL UNIQUE
+-- -- );
+--
+-- -- -- Table for Albums
+-- -- CREATE TABLE album
+-- -- (
+-- --     id           BIGSERIAL PRIMARY KEY,
+-- --     title        VARCHAR(255) COLLATE "C" NOT NULL UNIQUE,
+-- --     release_date TIMESTAMP
+-- -- );
+--
+-- -- -- Table for Songs
+-- -- CREATE TABLE song
+-- -- (
+-- --     id           BIGSERIAL PRIMARY KEY,
+-- --     name         VARCHAR(255) NOT NULL,
+-- --     duration     BIGINT, -- Duration in seconds
+-- --     release_date TIMESTAMP,
+-- --     album_id     BIGSERIAL REFERENCES album (id),
+-- --     genre_id     BIGSERIAL REFERENCES genre (id)
+-- -- );
+--
+-- -- CREATE TABLE artist_albums
+-- -- (
+-- --     artist_id BIGSERIAL REFERENCES artist (id),
+-- --     album_id  BIGSERIAL REFERENCES album (id),
+-- --     PRIMARY KEY (artist_id, album_id)
+-- -- );
