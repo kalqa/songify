@@ -55,6 +55,12 @@ public class SongRestController {
         return ResponseEntity.ok(body);
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<GetSongResponseDto> test() {
+        songRetriever.compareSongs();
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Long id) {
         songDeleter.deleteById(id);
