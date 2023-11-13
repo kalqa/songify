@@ -47,8 +47,7 @@ class Song extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SongLanguage language;
 
-    public Song(String name, String artist) {
+    public Song(String name) {
         this.name = name;
-        this.artist = artist;
     }
 }

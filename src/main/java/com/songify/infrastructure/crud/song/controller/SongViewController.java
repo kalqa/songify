@@ -1,4 +1,4 @@
-package com.songify.infrastructure.controller;
+package com.songify.infrastructure.crud.song.controller;
 
 import java.util.HashMap;
 import java.util.Map;
