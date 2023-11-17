@@ -1,9 +1,8 @@
-package com.songify.domain.crud.album;
+package com.songify.domain.crud.album.query;
 
-
-import com.songify.domain.crud.util.BaseEntity;
 import com.songify.domain.crud.artist.query.SimpleArtistQueryDto;
 import com.songify.domain.crud.song.query.SimpleSongQueryDto;
+import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,22 +10,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Getter(AccessLevel.PACKAGE)
-@Setter(AccessLevel.PACKAGE)
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-class Album extends BaseEntity {
+@Table(name = "album")
+@AllArgsConstructor
+@Builder
+public class SimpleAlbumQueryDto extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "album_id_seq", strategy = GenerationType.SEQUENCE)
@@ -42,27 +43,20 @@ class Album extends BaseEntity {
 
     private Instant releaseDate;
 
-    @ManyToMany(mappedBy = "albums")
-    private Set<SimpleArtistQueryDto> artist;
+    private Set<SimpleArtistQueryDto> artists;
 
-    @OneToMany(mappedBy = "album")
     private Set<SimpleSongQueryDto> songs;
 
-    @Override
-    public String toString() {
-        return "Album{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", releaseDate=" + releaseDate +
-                '}';
+    Set<SimpleSongQueryDto> getSongs() {
+        return Collections.unmodifiableSet(songs);
     }
 
-    void addArtistToAlbum(SimpleArtistQueryDto artist) {
-        this.artist.add(artist);
+    Set<SimpleArtistQueryDto> getArtists() {
+        return Collections.unmodifiableSet(artists);
     }
 
-    void addSongToAlbum(SimpleSongQueryDto song) {
-        this.songs.add(song);
+    public SimpleAlbumQueryDto(@NotNull final String title) {
+        this.title = title;
     }
 
 }

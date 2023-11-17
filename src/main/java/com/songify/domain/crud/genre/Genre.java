@@ -1,16 +1,23 @@
 package com.songify.domain.crud.genre;
 
-import com.songify.domain.crud.BaseEntity;
-import jakarta.persistence.*;
-import lombok.*;
+import com.songify.domain.crud.util.BaseEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
-@Getter
 @Entity
-@Setter
+@Getter(AccessLevel.PACKAGE)
+@Setter(AccessLevel.PACKAGE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Genre extends BaseEntity {
+class Genre extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "genre_id_seq", strategy = GenerationType.SEQUENCE)
@@ -19,7 +26,7 @@ public class Genre extends BaseEntity {
             sequenceName = "genre_id_seq",
             allocationSize = 1
     )
-    public Long id;
+    private Long id;
 
     private String name;
 

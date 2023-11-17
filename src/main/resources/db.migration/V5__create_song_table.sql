@@ -9,8 +9,8 @@ CREATE TABLE song
     language     VARCHAR(255),
 --     album_id     BIGSERIAL,
 --     genre_id     BIGSERIAL,
-    album_id     BIGSERIAL REFERENCES album (id),
-    genre_id     BIGSERIAL REFERENCES genre (id)
+    album_id     BIGINT REFERENCES album (id) ,
+    genre_id     BIGINT REFERENCES genre (id)
 );
 --
 -- ALTER TABLE song

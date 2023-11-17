@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS artist_albums CASCADE;
 
 CREATE TABLE artist_albums
 (
-    album_id  BIGSERIAL NOT NULL,
-    artist_id BIGSERIAL NOT NULL,
+    album_id  BIGINT NOT NULL,
+    artist_id BIGINT NOT NULL,
     CONSTRAINT pk_artist_albums PRIMARY KEY (album_id, artist_id)
 );
 

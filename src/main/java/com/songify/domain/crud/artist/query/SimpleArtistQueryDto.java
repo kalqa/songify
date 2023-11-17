@@ -1,4 +1,4 @@
-package com.songify.domain.crud.artist;
+package com.songify.domain.crud.artist.query;
 
 import com.songify.domain.crud.util.BaseEntity;
 import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
@@ -11,20 +11,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
-import lombok.AccessLevel;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
-@Getter(AccessLevel.PACKAGE)
-@Setter(AccessLevel.PACKAGE)
-@AllArgsConstructor
 @NoArgsConstructor
-class Artist extends BaseEntity {
+@Table(name = "artist")
+@AllArgsConstructor
+@Getter
+public class SimpleArtistQueryDto extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "artist_id_seq", strategy = GenerationType.SEQUENCE)
@@ -45,20 +44,4 @@ class Artist extends BaseEntity {
     )
     private Set<SimpleAlbumQueryDto> albums;
 
-    public Artist(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "name = " + name + ")";
-    }
-
-    void addAlbum(SimpleAlbumQueryDto album) {
-        this.albums.add(album);
-    }
 }
-
-
