@@ -15,13 +15,13 @@ class SongAdder {
 
     private final SongRepository songRepository;
 
-    Song addSong(final Song song, final Long albumId, final Long genreId) {
+    Song addSong(final Song song, final SimpleAlbumQueryDto album, final SimpleGenreQueryDto genre, final SongLanguage songLanguageDatabase) {
         log.info("adding new song: " + song);
         song.setDuration(200L);
         song.setReleaseDate(Instant.now());
-        SimpleAlbumQueryDto album = new SimpleAlbumQueryDto("some title");
         song.setAlbum(album);
-//        song.setGenre(SimpleGenreQueryDto.builder().build());
+        song.setGenre(genre);
+        song.setLanguage(songLanguageDatabase);
         return songRepository.save(song);
     }
 }

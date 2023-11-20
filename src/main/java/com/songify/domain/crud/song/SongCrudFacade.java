@@ -1,7 +1,9 @@
 package com.songify.domain.crud.song;
 
 import com.songify.domain.crud.album.AlbumCrudFacade;
+import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
 import com.songify.domain.crud.genre.GenreCrudFacade;
+import com.songify.domain.crud.genre.query.SimpleGenreQueryDto;
 import com.songify.domain.crud.song.dto.SongDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -67,18 +69,21 @@ public class SongCrudFacade {
     }
 
     public SongDto addSong(final SongDto songDto) {
-        Long albumId = albumCrudFacade.findAlbumById(songDto.albumId()).getId();
-        Long genreId = genreCrudFacade.findGenreById(songDto.genreId()).getId();
+        SimpleAlbumQueryDto album = albumCrudFacade.findAlbumById(songDto.albumId());
+        SimpleGenreQueryDto genre = genreCrudFacade.findGenreById(songDto.genreId());
+        String songLanguage = songDto.language();
+        SongLanguage songLanguageDatabase = SongLanguage.valueOf(songLanguage);
         // some domain validator
         String name = songDto.name();
         Song vaidatedAndReadytoSaveSong = new Song(name);
         // some domain validator ended checking
-        Song addedSong = songAdder.addSong(vaidatedAndReadytoSaveSong, albumId, genreId);
+        Song addedSong = songAdder.addSong(vaidatedAndReadytoSaveSong, album, genre, songLanguageDatabase);
         return SongDto.builder()
                 .id(addedSong.getId())
                 .name(addedSong.getName())
-//                .genreId(addedSong.getGenre().getId())
+                .genreId(addedSong.getGenre().getId())
                 .albumId(addedSong.getAlbum().getId())
+                .language(addedSong.getLanguage().name())
                 .build();
     }
 

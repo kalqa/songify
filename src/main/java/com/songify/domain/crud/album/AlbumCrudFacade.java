@@ -1,22 +1,20 @@
 package com.songify.domain.crud.album;
 
-import com.songify.domain.crud.album.dto.AlbumInfo;
 import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class AlbumCrudFacade {
 
-    private final AlbumRepository albumRepository;
+    private final AlbumQueryRepository albumRepository;
 
-    public AlbumInfo findAlbumById(final long albumId) {
-        return albumRepository.findById(albumId)
+    public SimpleAlbumQueryDto findAlbumById(final long albumId) {
+        return albumRepository.findQueryDtoById(albumId)
                 .orElseThrow(() -> new AlbumNotFoundException(albumId));
     }
 
-    AlbumInfo addSongToAlbum(final Long albumId, final Long songId) {
-        return null;
-    }
 }

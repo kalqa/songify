@@ -23,6 +23,7 @@ class SongControllerMapper {
                 .name(dto.songName())
                 .albumId(dto.albumId())
                 .genreId(dto.genreId())
+                .language(dto.language().name())
                 .build();
     }
 

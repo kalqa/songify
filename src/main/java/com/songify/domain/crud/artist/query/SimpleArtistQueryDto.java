@@ -1,41 +1,35 @@
 package com.songify.domain.crud.artist.query;
 
-import com.songify.domain.crud.util.BaseEntity;
 import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
+
 
 @Entity
+@Getter
 @NoArgsConstructor
 @Table(name = "artist")
-@AllArgsConstructor
-@Getter
-public class SimpleArtistQueryDto extends BaseEntity {
+public class SimpleArtistQueryDto {
 
     @Id
-    @GeneratedValue(generator = "artist_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(
-            name = "artist_id_seq",
-            sequenceName = "artist_id_seq",
-            allocationSize = 1
-    )
     private Long id;
 
-    @Column(nullable = false)
+    private UUID uuid;
+
     private String name;
+
+    private Instant releaseDate;
 
     @ManyToMany
     @JoinTable(
@@ -43,5 +37,18 @@ public class SimpleArtistQueryDto extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "album_id")}
     )
     private Set<SimpleAlbumQueryDto> albums;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleArtistQueryDto that = (SimpleArtistQueryDto) o;
+        return Objects.equals(uuid, that.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
+    }
 
 }
