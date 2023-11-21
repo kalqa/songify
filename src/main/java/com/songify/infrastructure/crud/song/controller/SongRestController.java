@@ -1,7 +1,8 @@
 package com.songify.infrastructure.crud.song.controller;
 
-import com.songify.domain.crud.song.dto.SongDto;
+import com.songify.domain.crud.artistalbums.SomeService;
 import com.songify.domain.crud.song.SongCrudFacade;
+import com.songify.domain.crud.song.dto.SongDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.UpdateSongRequestDto;
@@ -48,6 +49,7 @@ public
 class SongRestController {
 
     private final SongCrudFacade songFacade;
+    private final SomeService someService;
 
     @GetMapping
     ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 10) Pageable pageable) {
@@ -62,6 +64,11 @@ class SongRestController {
         SongDto song = songFacade.findSongDtoById(id);
         GetSongResponseDto response = mapFromSongToGetSongResponseDto(song);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/testing")
+    void test() {
+        someService.f();
     }
 
     @PostMapping

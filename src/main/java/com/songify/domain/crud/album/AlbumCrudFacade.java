@@ -1,6 +1,6 @@
 package com.songify.domain.crud.album;
 
-import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
+import com.songify.domain.crud.album.dto.AlbumDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AlbumCrudFacade {
 
-    private final AlbumQueryRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
-    public SimpleAlbumQueryDto findAlbumById(final long albumId) {
-        return albumRepository.findQueryDtoById(albumId)
+    public AlbumDto findAlbumById(final long albumId) {
+        return albumRepository.findById(albumId)
+                .map(album -> new AlbumDto(album.getId()))
                 .orElseThrow(() -> new AlbumNotFoundException(albumId));
     }
 

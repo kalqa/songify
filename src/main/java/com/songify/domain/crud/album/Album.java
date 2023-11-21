@@ -1,13 +1,11 @@
 package com.songify.domain.crud.album;
 
 
-import com.songify.domain.crud.artist.query.SimpleArtistQueryDto;
 import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -40,9 +38,6 @@ class Album extends BaseEntity {
 
     private Instant releaseDate;
 
-    @ManyToMany(mappedBy = "albums")
-    private Set<SimpleArtistQueryDto> artist;
-
     private Set<Long> songIds;
 
     void addSong(Long songId) {
@@ -56,10 +51,6 @@ class Album extends BaseEntity {
                 ", title='" + title + '\'' +
                 ", releaseDate=" + releaseDate +
                 '}';
-    }
-
-    void addArtistToAlbum(SimpleArtistQueryDto artist) {
-        this.artist.add(artist);
     }
 
 }
