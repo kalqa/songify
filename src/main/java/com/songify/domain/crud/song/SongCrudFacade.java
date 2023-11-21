@@ -1,9 +1,6 @@
 package com.songify.domain.crud.song;
 
-import com.songify.domain.crud.album.AlbumCrudFacade;
-import com.songify.domain.crud.album.query.SimpleAlbumQueryDto;
 import com.songify.domain.crud.genre.GenreCrudFacade;
-import com.songify.domain.crud.genre.query.SimpleGenreQueryDto;
 import com.songify.domain.crud.song.dto.SongDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -21,7 +18,6 @@ public class SongCrudFacade {
     private final SongUpdater songUpdater;
     private final SongDeleter songDeleter;
     private final SongAdder songAdder;
-    private final AlbumCrudFacade albumCrudFacade;
     private final GenreCrudFacade genreCrudFacade;
 
     public List<SongDto> findAll(Pageable pageable) {
@@ -30,8 +26,7 @@ public class SongCrudFacade {
                 .map(song -> SongDto.builder()
                         .id(song.getId())
                         .name(song.getName())
-                        .albumId(song.getAlbum().getId())
-                        .genreId(song.getGenre().getId())
+                        .genreId(song.getGenreId())
                         .name(song.getName())
                         .build())
                 .toList();
@@ -69,20 +64,18 @@ public class SongCrudFacade {
     }
 
     public SongDto addSong(final SongDto songDto) {
-        SimpleAlbumQueryDto album = albumCrudFacade.findAlbumById(songDto.albumId());
-        SimpleGenreQueryDto genre = genreCrudFacade.findGenreById(songDto.genreId());
+        Long genreId = genreCrudFacade.findGenreById(songDto.genreId()).genreId();
         String songLanguage = songDto.language();
         SongLanguage songLanguageDatabase = SongLanguage.valueOf(songLanguage);
         // some domain validator
         String name = songDto.name();
         Song vaidatedAndReadytoSaveSong = new Song(name);
         // some domain validator ended checking
-        Song addedSong = songAdder.addSong(vaidatedAndReadytoSaveSong, album, genre, songLanguageDatabase);
+        Song addedSong = songAdder.addSong(vaidatedAndReadytoSaveSong, genreId, songLanguageDatabase);
         return SongDto.builder()
                 .id(addedSong.getId())
                 .name(addedSong.getName())
-                .genreId(addedSong.getGenre().getId())
-                .albumId(addedSong.getAlbum().getId())
+                .genreId(addedSong.getGenreId())
                 .language(addedSong.getLanguage().name())
                 .build();
     }

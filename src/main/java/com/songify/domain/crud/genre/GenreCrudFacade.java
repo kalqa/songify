@@ -1,6 +1,6 @@
 package com.songify.domain.crud.genre;
 
-import com.songify.domain.crud.genre.query.SimpleGenreQueryDto;
+import com.songify.domain.crud.genre.dto.GenreDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GenreCrudFacade {
 
-    private final GenreQueryRepository genreQueryRepository;
+    private final GenreRepository genreRepository;
 
-    public SimpleGenreQueryDto findGenreById(final long genreId) {
-        return genreQueryRepository.findById(genreId)
+    public GenreDto findGenreById(final long genreId) {
+        return genreRepository.findById(genreId)
+                .map(genre -> GenreDto.builder().genreId(genreId).build())
                 .orElseThrow(() -> new GenreNotFoundException(genreId));
     }
 }

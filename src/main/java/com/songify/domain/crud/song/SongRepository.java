@@ -36,8 +36,8 @@ interface SongRepository extends Repository<Song, Long> {
 
     // todo check if it works
     @Query(value = "Select s from Song s " +
-            "left join s.genre g " +
-            "left join s.album a " +
+            "left join s.genreId g " +
+//            "left join s.album a " +
             "order by s.id")
     List<Song> findSongsWithGenresUsingTwoJoins();
 

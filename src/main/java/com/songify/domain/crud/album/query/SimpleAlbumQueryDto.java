@@ -1,11 +1,9 @@
 package com.songify.domain.crud.album.query;
 
 import com.songify.domain.crud.artist.query.SimpleArtistQueryDto;
-import com.songify.domain.crud.song.query.SimpleSongQueryDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -37,15 +35,14 @@ public class SimpleAlbumQueryDto {
     @ManyToMany(mappedBy = "albums")
     private Set<SimpleArtistQueryDto> artist;
 
-    @OneToMany(mappedBy = "album")
-    private Set<SimpleSongQueryDto> songs;
+    private Set<Long> songIds;
 
     Set<SimpleArtistQueryDto> getArtist() {
         return Collections.unmodifiableSet(artist);
     }
 
-    Set<SimpleSongQueryDto> getSongs() {
-        return Collections.unmodifiableSet(songs);
+    Set<Long> getSongIds() {
+        return songIds;
     }
 
     @Override

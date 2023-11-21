@@ -1,15 +1,13 @@
 package com.songify.domain.crud.album;
 
 
-import com.songify.domain.crud.util.BaseEntity;
 import com.songify.domain.crud.artist.query.SimpleArtistQueryDto;
-import com.songify.domain.crud.song.query.SimpleSongQueryDto;
+import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -45,8 +43,11 @@ class Album extends BaseEntity {
     @ManyToMany(mappedBy = "albums")
     private Set<SimpleArtistQueryDto> artist;
 
-    @OneToMany(mappedBy = "album")
-    private Set<SimpleSongQueryDto> songs;
+    private Set<Long> songIds;
+
+    void addSong(Long songId) {
+        songIds.add(songId);
+    }
 
     @Override
     public String toString() {
@@ -59,10 +60,6 @@ class Album extends BaseEntity {
 
     void addArtistToAlbum(SimpleArtistQueryDto artist) {
         this.artist.add(artist);
-    }
-
-    void addSongToAlbum(SimpleSongQueryDto song) {
-        this.songs.add(song);
     }
 
 }

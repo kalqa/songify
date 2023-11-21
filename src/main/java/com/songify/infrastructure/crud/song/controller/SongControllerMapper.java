@@ -21,7 +21,6 @@ class SongControllerMapper {
         return SongDto
                 .builder()
                 .name(dto.songName())
-                .albumId(dto.albumId())
                 .genreId(dto.genreId())
                 .language(dto.language().name())
                 .build();

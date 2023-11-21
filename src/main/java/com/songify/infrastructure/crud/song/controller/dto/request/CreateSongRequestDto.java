@@ -14,9 +14,6 @@ public record CreateSongRequestDto(
         @NotEmpty(message = "artist must not be empty")
         String artist,
 
-        @NotNull(message = "albumId must not be null")
-        Long albumId,
-
         @NotNull(message = "genreId must not be null")
         Long genreId,
 
