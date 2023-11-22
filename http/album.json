@@ -1,0 +1,154 @@
+[
+  {
+    "id": 1,
+    "title": "Album 1",
+    "release_date": "2023-01-15 11:00:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "fc3d1f84-b119-4f7c-8e1a-cac62d60a2cb"
+  },
+  {
+    "id": 2,
+    "title": "Album 2",
+    "release_date": "2023-03-20 13:30:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "9cafc798-2fb2-430a-aed0-8fb23cca3222"
+  },
+  {
+    "id": 3,
+    "title": "Greatest Hits",
+    "release_date": "2022-10-05 08:45:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "e694b438-573f-4bc2-afd1-515b29463ae4"
+  },
+  {
+    "id": 4,
+    "title": "Another Album",
+    "release_date": "2023-05-12 07:15:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "28af9f75-f072-4e17-82e3-86bb91353b45"
+  },
+  {
+    "id": 5,
+    "title": "Best of 2023",
+    "release_date": "2023-12-28 17:20:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "2c0a998e-2c9f-44ca-8df3-fe61311aad54"
+  },
+  {
+    "id": 6,
+    "title": "Golden Classics",
+    "release_date": "2022-07-02 14:00:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "faf6306d-b9cd-42ae-a4e8-e40e491fc6ae"
+  },
+  {
+    "id": 7,
+    "title": "Summer Vibes",
+    "release_date": "2023-06-10 11:30:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "21e44a48-36aa-4b8b-97a3-bbfaa7a84238"
+  },
+  {
+    "id": 8,
+    "title": "Retro Hits",
+    "release_date": "2023-09-22 09:10:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "80cd27e9-f78f-4b86-9390-9db5b61edc4a"
+  },
+  {
+    "id": 9,
+    "title": "Live Concert",
+    "release_date": "2023-02-18 19:45:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "6d0a57f9-cc0c-430f-8284-f24891d57e4d"
+  },
+  {
+    "id": 10,
+    "title": "Acoustic Sessions",
+    "release_date": "2022-12-05 14:25:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "9c1187c0-4980-42b1-9381-3b4bf08e1c60"
+  },
+  {
+    "id": 11,
+    "title": "Party Anthems",
+    "release_date": "2023-08-17 15:55:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "183ca7f4-59d0-44b0-9b42-2cc31f1f1046"
+  },
+  {
+    "id": 12,
+    "title": "Country Hits",
+    "release_date": "2023-04-28 06:30:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "1d587543-1327-47a7-a671-64aeab28864c"
+  },
+  {
+    "id": 13,
+    "title": "Singles Collection",
+    "release_date": "2022-11-11 18:40:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "1138e6e4-562f-4a9b-ad60-fe826c989e13"
+  },
+  {
+    "id": 14,
+    "title": "Epic Soundtracks",
+    "release_date": "2023-07-14 08:05:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "d3cc92cc-9278-47a1-a444-82e2077033ff"
+  },
+  {
+    "id": 15,
+    "title": "Chill Vibes",
+    "release_date": "2023-01-30 21:15:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "e9485bad-c314-4b90-9ccc-9ff3b89169b7"
+  },
+  {
+    "id": 16,
+    "title": "Rock Legends",
+    "release_date": "2023-03-05 13:50:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "090227a3-a900-4b8a-b198-ca63e917c371"
+  },
+  {
+    "id": 17,
+    "title": "Indie Jams",
+    "release_date": "2022-09-08 14:40:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "fc211555-4fb5-49f4-8dc1-960b2284a2b7"
+  },
+  {
+    "id": 18,
+    "title": "Guitar Heroes",
+    "release_date": "2023-06-25 09:55:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "0a56c9de-a601-4fb3-9f85-f44b14ef49cc"
+  },
+  {
+    "id": 19,
+    "title": "Dance Party Mix",
+    "release_date": "2023-07-30 17:10:00.000000 +00:00",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.776200 +00:00",
+    "uuid": "7a2d27a7-6166-4bdc-a33c-33a1d10d9d08"
+  }
+]

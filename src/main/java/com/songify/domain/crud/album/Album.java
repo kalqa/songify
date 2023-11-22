@@ -2,10 +2,14 @@ package com.songify.domain.crud.album;
 
 
 import com.songify.domain.crud.util.BaseEntity;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -13,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.Set;
@@ -22,7 +27,8 @@ import java.util.Set;
 @Setter(AccessLevel.PACKAGE)
 @AllArgsConstructor
 @NoArgsConstructor
-class Album extends BaseEntity {
+@ToString
+public class Album extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "album_id_seq", strategy = GenerationType.SEQUENCE)
@@ -38,19 +44,24 @@ class Album extends BaseEntity {
 
     private Instant releaseDate;
 
-    private Set<Long> songIds;
+//    private Set<Long> songIds;
 
-    void addSong(Long songId) {
-        songIds.add(songId);
-    }
+    @ElementCollection
+    @CollectionTable(name = "artist_albums", joinColumns = @JoinColumn(name = "album_id"))
+    @Column(name = "artist_id")
+    private Set<Long> artistIds;
 
-    @Override
-    public String toString() {
-        return "Album{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", releaseDate=" + releaseDate +
-                '}';
-    }
+//    void addSong(Long songId) {
+//        songIds.add(songId);
+//    }
+
+//    @Override
+//    public String toString() {
+//        return "Album{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", releaseDate=" + releaseDate +
+//                '}';
+//    }
 
 }

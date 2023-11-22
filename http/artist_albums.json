@@ -1,0 +1,82 @@
+[
+  {
+    "album_id": 1,
+    "artist_id": 3
+  },
+  {
+    "album_id": 2,
+    "artist_id": 4
+  },
+  {
+    "album_id": 2,
+    "artist_id": 5
+  },
+  {
+    "album_id": 3,
+    "artist_id": 6
+  },
+  {
+    "album_id": 3,
+    "artist_id": 7
+  },
+  {
+    "album_id": 3,
+    "artist_id": 8
+  },
+  {
+    "album_id": 4,
+    "artist_id": 9
+  },
+  {
+    "album_id": 4,
+    "artist_id": 10
+  },
+  {
+    "album_id": 5,
+    "artist_id": 11
+  },
+  {
+    "album_id": 5,
+    "artist_id": 12
+  },
+  {
+    "album_id": 6,
+    "artist_id": 13
+  },
+  {
+    "album_id": 6,
+    "artist_id": 14
+  },
+  {
+    "album_id": 7,
+    "artist_id": 15
+  },
+  {
+    "album_id": 7,
+    "artist_id": 16
+  },
+  {
+    "album_id": 8,
+    "artist_id": 17
+  },
+  {
+    "album_id": 8,
+    "artist_id": 18
+  },
+  {
+    "album_id": 9,
+    "artist_id": 19
+  },
+  {
+    "album_id": 9,
+    "artist_id": 20
+  },
+  {
+    "album_id": 1,
+    "artist_id": 9
+  },
+  {
+    "album_id": 11,
+    "artist_id": 4
+  }
+]

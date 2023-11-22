@@ -1,0 +1,128 @@
+[
+  {
+    "id": 3,
+    "name": "Taylor Swift",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "eda9b092-e701-4828-b464-279ea1a9e69c"
+  },
+  {
+    "id": 4,
+    "name": "Beyoncé",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "6e0715e8-7a00-4dfb-8ac8-e6ae267964dc"
+  },
+  {
+    "id": 5,
+    "name": "The Weeknd",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "e69165e4-46fc-470a-ba1f-f3f35c92e8b9"
+  },
+  {
+    "id": 6,
+    "name": "Drake",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "e7490546-96b5-4b32-9cbb-7d13735ac49e"
+  },
+  {
+    "id": 7,
+    "name": "Adele",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "674fddd7-b4f1-4c6c-ad19-3fe1c07ada17"
+  },
+  {
+    "id": 8,
+    "name": "Billie Eilish",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "ac9406e9-0352-4685-b07a-5918211b27c5"
+  },
+  {
+    "id": 9,
+    "name": "Justin Bieber",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "be834d73-fad2-4129-9794-babbe7861284"
+  },
+  {
+    "id": 10,
+    "name": "Dua Lipa",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "65d08173-84c9-48e9-8aa9-eb27af1fdeaa"
+  },
+  {
+    "id": 11,
+    "name": "Coldplay",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "36a4abbb-bb0d-4dcc-a205-40f8ce840ae5"
+  },
+  {
+    "id": 12,
+    "name": "Kendrick Lamar",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "446f9cbb-1d4d-4240-9e62-530f1d81ea97"
+  },
+  {
+    "id": 13,
+    "name": "Katy Perry",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "5ad2e4b7-fe1a-4a28-a1e9-f69e91118f03"
+  },
+  {
+    "id": 14,
+    "name": "Bruno Mars",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "ee427572-e82a-4a33-b72c-7f7afc826839"
+  },
+  {
+    "id": 15,
+    "name": "Rihanna",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "bc44b6df-55b4-408c-926b-fda5c86034ca"
+  },
+  {
+    "id": 16,
+    "name": "Eminem",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "47d8dd49-74f8-4e84-8870-8f2121fe2abf"
+  },
+  {
+    "id": 17,
+    "name": "Lady Gaga",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "6e7817bb-2693-42ba-86e1-266fafa6b6a3"
+  },
+  {
+    "id": 18,
+    "name": "Post Malone",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "8194939f-5105-49e8-a29b-a194764f1dd6"
+  },
+  {
+    "id": 19,
+    "name": "Nicki Minaj",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "73a77121-a91c-4c22-96c2-d07967a97a32"
+  },
+  {
+    "id": 20,
+    "name": "Bob Dylan",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.791136 +00:00",
+    "uuid": "7da73407-03a5-44aa-a0a3-850fe3f4aa7e"
+  }
+]

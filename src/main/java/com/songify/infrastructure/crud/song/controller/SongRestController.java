@@ -68,7 +68,32 @@ class SongRestController {
 
     @GetMapping("/testing")
     void test() {
-        someService.f();
+        someService.first();
+    }
+
+    @GetMapping("/testing2")
+    void test2() {
+        someService.second();
+    }
+
+//    @GetMapping("/testing3")
+//    void test3() {
+//        someService.third();
+//    }
+
+    @GetMapping("/testing4/{artistId}/{albumId}")
+    void test4(@PathVariable Long artistId, @PathVariable Long albumId) {
+        someService.addArtistToAlbum(artistId, albumId);
+    }
+
+    @DeleteMapping("/testing4/{artistId}/{albumId}")
+    void test5(@PathVariable Long artistId, @PathVariable Long albumId) {
+        someService.deleteArtistFromAlbum(artistId, albumId);
+    }
+
+    @DeleteMapping("/testing5/{artistId}")
+    void test6(@PathVariable Long artistId) {
+        someService.deleteArtist(artistId);
     }
 
     @PostMapping

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Rock",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.838951 +00:00",
+    "uuid": "8b517e06-115c-4e4d-a227-f6ce67e8df6b"
+  },
+  {
+    "id": 2,
+    "name": "Pop",
+    "version": 0,
+    "created_on": "2023-11-22 10:01:58.838951 +00:00",
+    "uuid": "9e16ee4c-68f6-423a-b7c4-b26e7b3f7b6d"
+  }
+]
