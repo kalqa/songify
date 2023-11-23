@@ -44,7 +44,10 @@ public class Album extends BaseEntity {
 
     private Instant releaseDate;
 
-//    private Set<Long> songIds;
+    @ElementCollection
+    @CollectionTable(name = "song", joinColumns = @JoinColumn(name = "album_id"))
+    @Column(name = "id")
+    private Set<Long> songIds;
 
     @ElementCollection
     @CollectionTable(name = "artist_albums", joinColumns = @JoinColumn(name = "album_id"))

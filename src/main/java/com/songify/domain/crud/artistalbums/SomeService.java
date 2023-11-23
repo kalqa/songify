@@ -30,7 +30,7 @@ public class SomeService {
     }
 
     public void second() {
-        Optional<Album> byId = albumRepository.findById(1L);
+        Optional<Album> byId = albumRepository.findById(9L);
         Album album = byId.get();
         System.out.println(album);
     }
