@@ -1,15 +1,17 @@
+SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
+
 1. można dodać artystę (nazwa artysty)
 2. można dodać gatunek muzyczny (nazwa gatunku)
 3. można dodać album (tytuł, data wydania)
 4. można dodać piosenkę (tytuł, czas trwania, data wydania)
-5. można usunąć artystę
-6. można usunąć gatunek muzyczny
-7. można usunąć album
+5. można usunąć artystę (usuwamy wtedy jego piosenki oraz albumy)
+6. można usunąć gatunek muzyczny (wszystkie piosenki które miały ten gatunek od teraz nie mają żadnego)
+7. można usunąć album (usuwamy wtedy wszystkie piosenki nalezace do tego albumu)
 8. można usunąć piosenkę
-9. można edytować artystę
-10. można edytować gatunek muzyczny
-11. można edytować album
-12. można edytować piosenkę
+9. można edytować piosenki artysty, oraz jego nazwę
+10. można edytować nazwę gatunku muzycznego
+11. można edytować album (dodawać piosenki, arytstów, zmieniac nazwe albumu)
+12. można edytować piosenkę (czas trwania, artystę, nazwę piosenki)
 13. można przypisać piosenki tylko do albumów
 14. można przypisać artystów do albumów (album może mieć więcej artystów, artysta może mieć kilka albumów)
 15. można przypisać tylko jeden gatunek muzyczny do piosenki
