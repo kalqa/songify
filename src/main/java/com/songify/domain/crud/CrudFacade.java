@@ -1,60 +1,70 @@
 package com.songify.domain.crud;
 
+import com.songify.domain.crud.dto.AddGenreToSongDto;
 import com.songify.domain.crud.dto.AlbumDto;
 import com.songify.domain.crud.dto.GenreDto;
 import com.songify.domain.crud.dto.SongDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 
-@Component
 @AllArgsConstructor
+@Transactional
 public class CrudFacade {
 
-    private final AlbumCrudFacade albumCrudFacade;
-    private final GenreCrudFacade genreCrudFacade;
-    private final SongCrudFacade songCrudFacade;
+    private final SongAdder songAdder;
+    private final AlbumRetriever albumRetriever;
+    private final SongRetriever songRetriever;
+    private final GenreRetriever genreRetriever;
+    private final AlbumUpdater albumUpdater;
+    private final SongUpdater songUpdater;
+    private final SongDeleter songDeleter;
 
     public AlbumDto findAlbumById(final long albumId) {
-        return albumCrudFacade.findDtoById(albumId);
+        return albumRetriever.findDtoById(albumId);
     }
 
     public GenreDto findGenreById(final long genreId) {
-        return genreCrudFacade.findGenreById(genreId);
+        return genreRetriever.findGenreDtoById(genreId);
     }
 
     public List<SongDto> findAllSongs(Pageable pageable) {
-        return songCrudFacade.findAll(pageable);
+        return songRetriever.findAll(pageable);
     }
 
     public void updateSongById(Long id, SongDto newSongDto) {
-        songCrudFacade.updateById(id, newSongDto);
+        songUpdater.updateById(id, newSongDto);
+    }
+
+    public AddGenreToSongDto addGenreToSong(Long songId, Long genreId) {
+        songUpdater.addGenreToSong(songId, genreId);
+        return new AddGenreToSongDto(songId, genreId);
     }
 
     public SongDto updateSongPartiallyById(Long id, SongDto songFromRequest) {
-        return songCrudFacade.updatePartiallyById(id, songFromRequest);
+        return songUpdater.updatePartiallyById(id, songFromRequest);
     }
 
     public SongDto addSong(final SongDto songDto) {
-        return songCrudFacade.addSong(songDto);
+        return songAdder.addSong(songDto);
     }
 
     public void deleteSongById(Long id) {
-        songCrudFacade.deleteById(id);
+        songDeleter.deleteById(id);
     }
 
     public SongDto findSongDtoById(Long id) {
-        return songCrudFacade.findSongDtoById(id);
+        return songRetriever.findSongDtoById(id);
     }
 
-    public AlbumDto addArtistToAlbum(Long artistId, Long albumId){
-        return albumCrudFacade.addArtistToAlbum(artistId, albumId);
+    public AlbumDto addArtistToAlbum(Long artistId, Long albumId) {
+        return albumUpdater.addArtistToAlbum(artistId, albumId);
     }
 
     public Set<AlbumDto> findAllAlbums(final Pageable pageable) {
-        return albumCrudFacade.findAll(pageable);
+        return albumRetriever.findAll(pageable);
     }
 }

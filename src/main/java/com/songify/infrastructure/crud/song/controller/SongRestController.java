@@ -1,6 +1,7 @@
 package com.songify.infrastructure.crud.song.controller;
 
 import com.songify.domain.crud.CrudFacade;
+import com.songify.domain.crud.dto.AddGenreToSongDto;
 import com.songify.domain.crud.dto.SongDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
@@ -86,6 +87,15 @@ class SongRestController {
         crudFacade.updateSongById(id, newSongDto);
         UpdateSongResponseDto body = mapFromSongToUpdateSongResponseDto(newSongDto);
         return ResponseEntity.ok(body);
+    }
+
+    @PutMapping("/{songId}/{genreId}")
+    ResponseEntity<AddGenreToSongDto> addGenreToSong(
+            @PathVariable Long songId,
+            @PathVariable Long genreId
+    ) {
+        AddGenreToSongDto addGenreToSongDto = crudFacade.addGenreToSong(songId, genreId);
+        return ResponseEntity.ok(addGenreToSongDto);
     }
 
     @PatchMapping("/{id}")
