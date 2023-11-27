@@ -11,11 +11,11 @@ class CrudFacadeConfiguration {
                           AlbumRepository albumRepository,
                           GenreRepository genreRepository,
                           ArtistRepository artistRepository) {
-        SongAdder songAdder = new SongAdder(songRepository);
+        SongRetriever songRetriever = new SongRetriever(songRepository);
         AlbumRetriever albumRetriever = new AlbumRetriever(albumRepository);
         ArtistRetriever artistRetriever = new ArtistRetriever(artistRepository);
-        SongRetriever songRetriever = new SongRetriever(songRepository);
         GenreRetriever genreRetriever = new GenreRetriever(genreRepository);
+        SongAdder songAdder = new SongAdder(songRepository, songRetriever);
         AlbumUpdater albumUpdater = new AlbumUpdater(albumRetriever, artistRetriever);
         SongUpdater songUpdater = new SongUpdater(songRepository, songRetriever, genreRetriever);
         SongDeleter songDeleter = new SongDeleter(songRepository, songRetriever);

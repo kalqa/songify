@@ -11,8 +11,10 @@ import java.time.Instant;
 class SongAdder {
 
     private final SongRepository songRepository;
+    private final SongRetriever songRetriever;
 
     public SongDto addSong(final SongDto songDto) {
+        songRetriever.existsById(songDto.id());
         String songLanguage = songDto.language();
         SongLanguage songLanguageDatabase = SongLanguage.valueOf(songLanguage);
         // some domain validator
