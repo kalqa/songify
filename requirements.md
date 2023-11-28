@@ -15,6 +15,7 @@ SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
 13. można przypisać piosenki tylko do albumów
 14. można przypisać artystów do albumów (album może mieć więcej artystów, artysta może mieć kilka albumów)
 15. można przypisać tylko jeden gatunek muzyczny do piosenki
+16. gdy nie ma przypisanego gatunku muzycznego do piosenki, to wyświetlamy "default"
 16. można wyświetlać wszystkie piosenki
 17. można wyświetlać wszystkie gatunki
 18. można wyświetlać wszystkich artystów
