@@ -1,4 +1,4 @@
-package com.songify.domain.crud.song;
+package com.songify.domain.crud;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

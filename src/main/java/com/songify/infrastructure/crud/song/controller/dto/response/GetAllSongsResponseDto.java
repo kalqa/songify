@@ -1,6 +1,6 @@
 package com.songify.infrastructure.crud.song.controller.dto.response;
 
-import com.songify.domain.crud.song.dto.SongDto;
+import com.songify.domain.crud.dto.SongDto;
 
 import java.util.List;
 
