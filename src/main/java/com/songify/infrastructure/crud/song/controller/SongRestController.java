@@ -1,6 +1,6 @@
 package com.songify.infrastructure.crud.song.controller;
 
-import com.songify.domain.crud.SongCrudFacade;
+import com.songify.domain.crud.SongifyCrudFacade;
 import com.songify.domain.crud.dto.SongDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
@@ -44,7 +44,7 @@ import static com.songify.infrastructure.crud.song.controller.SongControllerMapp
 public
 class SongRestController {
 
-    private final SongCrudFacade songFacade;
+    private final SongifyCrudFacade songFacade;
 
     @GetMapping
     ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 10) Pageable pageable) {
