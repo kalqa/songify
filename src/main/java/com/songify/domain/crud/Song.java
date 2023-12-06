@@ -38,9 +38,6 @@ class Song extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String artist;
-
     private Instant releaseDate;
 
     private Long duration;
