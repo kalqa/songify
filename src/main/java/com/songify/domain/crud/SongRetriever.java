@@ -1,5 +1,6 @@
 package com.songify.domain.crud;
 
+import com.songify.domain.crud.dto.GenreDto;
 import com.songify.domain.crud.dto.SongDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +23,7 @@ class SongRetriever {
                 .map(song -> SongDto.builder()
                         .id(song.getId())
                         .name(song.getName())
-                        .name(song.getName())
+                        .genre(new GenreDto(song.getGenre().getId(), song.getGenre().getName()))
                         .build())
                 .toList();
     }
