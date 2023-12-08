@@ -10,7 +10,10 @@ import java.util.Optional;
 
 interface SongRepository extends Repository<Song, Long> {
 
-    @Query("SELECT s FROM Song s")
+    @Query("""
+            SELECT s FROM Song s
+            join fetch s.genre
+            """)
     List<Song> findAll(Pageable pageable);
 
     @Query("SELECT s FROM Song s WHERE s.id =:id")
