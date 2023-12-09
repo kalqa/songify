@@ -30,4 +30,6 @@ interface SongRepository extends Repository<Song, Long> {
     Song save(Song song);
 
     boolean existsById(Long id);
+
+//    void deleteById(Long id);
 }
