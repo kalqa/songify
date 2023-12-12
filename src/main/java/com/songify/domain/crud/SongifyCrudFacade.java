@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -54,6 +53,10 @@ public class SongifyCrudFacade {
 
     public ArtistDto updateArtistNameById(Long artistId, String name){
         return artistUpdater.updateArtistNameById(artistId, name);
+    }
+
+    public ArtistDto addArtistWithDefaultAlbumAndSong(ArtistRequestDto dto) {
+        return artistAdder.addArtistWithDefaultAlbumAndSong(dto);
     }
 
     public SongDto addSong(final SongRequestDto dto) {
