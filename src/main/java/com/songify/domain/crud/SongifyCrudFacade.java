@@ -37,6 +37,7 @@ public class SongifyCrudFacade {
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
         return artistAdder.addArtist(dto.name());
+//    return new ArtistDto(0L, "amigo");
     }
 
     public GenreDto addGenre(GenreRequestDto dto) {

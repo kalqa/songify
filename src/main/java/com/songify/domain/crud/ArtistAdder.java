@@ -22,6 +22,12 @@ class ArtistAdder {
         return new ArtistDto(save.getId(), save.getName());
     }
 
+    private Artist saveArtist(final String name) {
+        Artist artist = new Artist(name);
+        Artist save = artistRepository.save(artist);
+        return save;
+    }
+
     ArtistDto addArtistWithDefaultAlbumAndSong(final ArtistRequestDto dto) {
         String artistName = dto.name();
         Artist save = saveArtistWithDefaultAlbumAndSong(artistName);
@@ -51,11 +57,5 @@ class ArtistAdder {
         //                0L,
         //                SongLanguageDto.OTHER
         //        ));
-    }
-
-    private Artist saveArtist(final String name) {
-        Artist artist = new Artist(name);
-        Artist save = artistRepository.save(artist);
-        return save;
     }
 }
