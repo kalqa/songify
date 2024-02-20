@@ -120,6 +120,10 @@ public class SongifyCrudFacade {
         songDeleter.deleteById(id);
     }
 
+    public Set<AlbumDto> findAlbumsByArtistId(Long artistId) {
+        return albumRetriever.findAlbumsDtoByArtistId(artistId);
+    }
+
 //    public void deleteSongAndGenreById(Long songId) {
 //        songDeleter.deleteSongAndGenreById(songId);
 //    }

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 class InMemoryArtistRepository implements ArtistRepository {
 
@@ -17,7 +16,8 @@ class InMemoryArtistRepository implements ArtistRepository {
 
     @Override
     public int deleteById(final Long id) {
-        return 0;
+        db.remove(id);
+        return id.intValue();
     }
 
     @Override
@@ -35,6 +35,7 @@ class InMemoryArtistRepository implements ArtistRepository {
 
     @Override
     public Optional<Artist> findById(final Long artistId) {
-        return Optional.empty();
+        Artist value = db.get(artistId);
+        return Optional.ofNullable(value);
     }
 }
