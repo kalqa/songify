@@ -1,6 +1,7 @@
 package com.songify.domain.crud;
 
 import com.songify.domain.crud.dto.AlbumDto;
+import com.songify.domain.crud.dto.AlbumInfo;
 import com.songify.domain.crud.dto.AlbumRequestDto;
 import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
@@ -126,9 +127,26 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
-    @DisplayName("todo")
     public void should_add_album_with_song() {
-        // TODO homework
+        // given
+        SongRequestDto songRequestDto = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(songRequestDto);
+        AlbumRequestDto album = AlbumRequestDto
+                .builder()
+                .songId(songDto.id())
+                .title("album title 1")
+                .build();
+        assertThat(songifyCrudFacade.findAllAlbums()).isEmpty();
+        // when
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(album);
+        // then
+        assertThat(songifyCrudFacade.findAllAlbums()).isNotEmpty();
+        AlbumInfo albumWithSongs = songifyCrudFacade.findAlbumByIdWithArtistsAndSongs(albumDto.id());
+        Set<AlbumInfo.SongInfo> songs = albumWithSongs.getSongs();
+        assertTrue(songs.stream().anyMatch(song -> song.getId().equals(songDto.id())));
     }
 
     @Test
