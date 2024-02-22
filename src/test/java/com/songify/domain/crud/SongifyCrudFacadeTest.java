@@ -169,27 +169,80 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
-    @DisplayName("todo")
+    @DisplayName("should add artist to album")
     public void should_add_artist_to_album() {
-        // TODO homework
+        // given
+        ArtistRequestDto shawnMendes = ArtistRequestDto.builder()
+                .name("shawn mendes")
+                .build();
+        Long artistId = songifyCrudFacade.addArtist(shawnMendes).id();
+        SongRequestDto song = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        Long songId = songDto.id();
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto
+                .builder()
+                .songId(songId)
+                .title("album title 1")
+                .build());
+        Long albumId = albumDto.id();
+        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEmpty();
+        // when
+        songifyCrudFacade.addArtistToAlbum(artistId, albumId);
+        // then
+        Set<AlbumDto> albumsByArtistId = songifyCrudFacade.findAlbumsByArtistId(artistId);
+        assertThat(albumsByArtistId)
+                .extracting(AlbumDto::id)
+                .containsExactly(0L);
     }
 
     @Test
     @DisplayName("todo")
     public void should_return_album_by_id() {
-        // TODO homework
+        // given
+        SongRequestDto song = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        Long songId = songDto.id();
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto
+                .builder()
+                .songId(songId)
+                .title("album title 1")
+                .build());
+        Long albumId = albumDto.id();
+        // when
+        AlbumDto albumById = songifyCrudFacade.findAlbumById(albumId);
+        // then
+        assertThat(albumById)
+                .isEqualTo(new AlbumDto(albumId, "album title 1"));
     }
 
     @Test
-    @DisplayName("todo")
+    @DisplayName("should throw exception when album not found by id")
     public void should_throw_exception_when_album_not_found_by_id() {
-        // TODO homework
+        // given
+        assertThat(songifyCrudFacade.findAllAlbums()).isEmpty();
+        // when
+        Throwable throwable = catchThrowable(() -> songifyCrudFacade.findAlbumById(55L));
+        // then
+        assertThat(throwable).isInstanceOf(AlbumNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("Album with id: 55 not found");
     }
 
     @Test
-    @DisplayName("todo")
+    @DisplayName("should throw exception when song not found by id")
     public void should_throw_exception_when_song_not_found_by_id() {
-        // TODO homework
+        // given
+        assertThat(songifyCrudFacade.findAllSongs(Pageable.unpaged())).isEmpty();
+        // when
+        Throwable throwable = catchThrowable(() -> songifyCrudFacade.findSongDtoById(55L));
+        // then
+        assertThat(throwable).isInstanceOf(SongNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("Song with id 55 not found");
     }
 
     @Test
