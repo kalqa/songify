@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -150,17 +151,21 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
-    @DisplayName("todo")
+    @DisplayName("should add song")
     public void should_add_song() {
-        // TODO homework
         // given
         SongRequestDto song = SongRequestDto.builder()
                 .name("song1")
                 .language(SongLanguageDto.ENGLISH)
                 .build();
+        assertThat(songifyCrudFacade.findAllSongs(Pageable.unpaged())).isEmpty();
         // when
-        SongDto songDto = songifyCrudFacade.addSong(song);
+        songifyCrudFacade.addSong(song);
         // then
+        List<SongDto> allSongs = songifyCrudFacade.findAllSongs(Pageable.unpaged());
+        assertThat(allSongs)
+                .extracting(SongDto::id)
+                .containsExactly(0L);
     }
 
     @Test
