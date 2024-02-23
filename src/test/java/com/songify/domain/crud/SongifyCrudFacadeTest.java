@@ -247,11 +247,39 @@ class SongifyCrudFacadeTest {
 
     @Test
     @DisplayName("Should delete only artist from album by id When there were more than 1 artist in album")
-    public void should_delete_only_artist_from_album_by_when_there_were_more_than_one_artist_in_album() {
-//        assertThat(songifyCrudFacade.findAlbumByIdWithArtistsAndSongs(albumId)
-//                .getArtists()
-//                .size()).isGreaterThanOrEqualTo(2);
-        // TODO homework
+    public void should_delete_only_artist_from_album_by_id_when_there_were_more_than_one_artist_in_album() {
+        // given
+        ArtistRequestDto shawnMendes = ArtistRequestDto.builder()
+                .name("shawn mendes")
+                .build();
+        ArtistRequestDto camilaCabello = ArtistRequestDto.builder()
+                .name("camila cabello")
+                .build();
+        Long artistId = songifyCrudFacade.addArtist(shawnMendes).id();
+        Long artistId2 = songifyCrudFacade.addArtist(camilaCabello).id();
+        SongRequestDto song = SongRequestDto.builder()
+                .name("Seniorita")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        Long songId = songDto.id();
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto
+                .builder()
+                .songId(songId)
+                .title("Album with Seniorita")
+                .build());
+        Long albumId = albumDto.id();
+        songifyCrudFacade.addArtistToAlbum(artistId, albumId);
+        songifyCrudFacade.addArtistToAlbum(artistId2, albumId);
+        assertThat(songifyCrudFacade.countArtistsByAlbumId(albumId)).isEqualTo(2);
+        // when
+        songifyCrudFacade.deleteArtistByIdWithAlbumsAndSongs(artistId);
+        // then
+        AlbumInfo album = songifyCrudFacade.findAlbumByIdWithArtistsAndSongs(albumId);
+        Set<AlbumInfo.ArtistInfo> artists = album.getArtists();
+        assertThat(artists)
+                .extracting("id")
+                .containsOnly(artistId2);
     }
 
     @Test
