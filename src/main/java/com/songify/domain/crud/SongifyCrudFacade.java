@@ -45,7 +45,7 @@ public class SongifyCrudFacade {
     }
 
     public AlbumDto addAlbumWithSong(AlbumRequestDto dto) {
-        return albumAdder.addAlbum(dto.songId(), dto.title(), dto.releaseDate());
+        return albumAdder.addAlbum(dto.songIds(), dto.title(), dto.releaseDate());
     }
 
     public void addArtistToAlbum(Long artistId, Long albumId) {

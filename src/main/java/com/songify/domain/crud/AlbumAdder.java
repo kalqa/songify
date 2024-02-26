@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -15,11 +17,15 @@ class AlbumAdder {
     private final SongRetriever songRetriever;
     private final AlbumRepository albumRepository;
 
-    AlbumDto addAlbum(final Long songId, final String title, final Instant instant) {
-        Song song = songRetriever.findSongById(songId);
+    AlbumDto addAlbum(final Set<Long> songIds, final String title, final Instant instant) {
+//        Song song = songRetriever.findSongById(songIds);
+        Set<Song> songs = songIds.stream()
+                .map(songRetriever::findSongById)
+                .collect(Collectors.toSet());
+        // todo refactor write songRetriever.findAllSongsByIds(songIds)
         Album album = new Album();
         album.setTitle(title);
-        album.addSongToAlbum(song);
+        album.addSongsToAlbum(songs);
         album.setReleaseDate(instant);
         Album savedAlbum = albumRepository.save(album);
         return new AlbumDto(savedAlbum.getId(), savedAlbum.getTitle());
