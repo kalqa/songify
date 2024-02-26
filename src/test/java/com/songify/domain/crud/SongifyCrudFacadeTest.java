@@ -128,6 +128,7 @@ class SongifyCrudFacadeTest {
 
     @Test
     public void should_add_album_with_song() {
+        // TODO UWAGA: TEN TEST JEDNAK NIE JEST ZADANIEM DOMOWYM! NAPISAŁEM GO W LEKCJI 13.14 :)
         // given
         SongRequestDto songRequestDto = SongRequestDto.builder()
                 .name("song1")
