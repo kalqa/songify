@@ -26,13 +26,16 @@ public class SongifyCrudFacade {
     private final SongUpdater songUpdater;
     private final SongDeleter songDeleter;
     private final SongAdder songAdder;
+    private final SongAssigner songAssigner;
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
     private final AlbumAdder albumAdder;
     private final ArtistRetriever artistRetriever;
     private final AlbumRetriever albumRetriever;
+    private final GenreRetriever genreRetriever;
     private final ArtistDeleter artistDeleter;
     private final ArtistAssigner artistAssigner;
+    private final GenreAssigner genreAssigner;
     private final ArtistUpdater artistUpdater;
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
@@ -50,6 +53,10 @@ public class SongifyCrudFacade {
 
     public void addArtistToAlbum(Long artistId, Long albumId) {
         artistAssigner.addArtistToAlbum(artistId, albumId);
+    }
+
+    public void assignGenreToSong(Long genreId, Long songId) {
+        genreAssigner.assignGenreToSong(genreId, songId);
     }
 
     public ArtistDto updateArtistNameById(Long artistId, String name) {
@@ -134,6 +141,14 @@ public class SongifyCrudFacade {
 
     public Set<AlbumDto> findAllAlbums() {
         return albumRetriever.findAll();
+    }
+
+    public Set<GenreDto> retrieveGenres() {
+        return genreRetriever.findAll();
+    }
+
+    public AlbumDto addSongToAlbum(Long albumId, Long songId) {
+        return songAssigner.assignSongToAlbum(albumId, songId);
     }
 
 //    public void deleteSongAndGenreById(Long songId) {

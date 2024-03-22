@@ -1,5 +1,6 @@
 INSERT INTO genre (name)
 VALUES
+    ('default'),
     ('Rock'),
     ('Pop'),
     ('Ballad'),

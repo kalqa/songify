@@ -218,7 +218,7 @@ class SongifyCrudFacadeTest {
         AlbumDto albumById = songifyCrudFacade.findAlbumById(albumId);
         // then
         assertThat(albumById)
-                .isEqualTo(new AlbumDto(albumId, "album title 1"));
+                .isEqualTo(new AlbumDto(albumId, "album title 1", Set.of(0L)));
     }
 
     @Test

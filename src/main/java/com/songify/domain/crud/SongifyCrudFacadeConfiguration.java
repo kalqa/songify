@@ -13,25 +13,31 @@ class SongifyCrudFacadeConfiguration {
         AlbumRetriever albumRetriever = new AlbumRetriever(albumRepository);
         GenreDeleter genreDeleter = new GenreDeleter(genreRepository);
         SongDeleter songDeleter = new SongDeleter(songRepository, songRetriever, genreDeleter);
-        SongAdder songAdder = new SongAdder(songRepository);
+        GenreRetriever genreRetriever = new GenreRetriever(genreRepository);
+        GenreAssigner genreAssigner = new GenreAssigner(genreRetriever, songRetriever);
+        SongAdder songAdder = new SongAdder(songRepository, genreAssigner);
         ArtistAdder artistAdder = new ArtistAdder(artistRepository, albumAdder);
         GenreAdder genreAdder = new GenreAdder(genreRepository);
         AlbumDeleter albumDeleter = new AlbumDeleter(albumRepository);
         ArtistDeleter artistDeleter = new ArtistDeleter(artistRepository, artistRetriever, albumRetriever, albumDeleter, songDeleter);
         ArtistAssigner artistAssigner = new ArtistAssigner(artistRetriever, albumRetriever);
         ArtistUpdater artistUpdater = new ArtistUpdater(artistRetriever, artistRepository);
+        SongAssigner songAssigner = new SongAssigner(albumRetriever, songRetriever);
         return new SongifyCrudFacade(
                 songRetriever,
                 songUpdater,
                 songDeleter,
                 songAdder,
+                songAssigner,
                 artistAdder,
                 genreAdder,
                 albumAdder,
                 artistRetriever,
                 albumRetriever,
+                genreRetriever,
                 artistDeleter,
                 artistAssigner,
+                genreAssigner,
                 artistUpdater
         );
     }
