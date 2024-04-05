@@ -1,6 +1,9 @@
 package feature;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.songify.SongifyApplication;
+import com.songify.domain.crud.dto.SongDto;
+import com.songify.infrastructure.crud.song.controller.dto.response.GetAllSongsResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,10 +13,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -31,6 +39,9 @@ class HappyPathIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
+    @Autowired
+    public ObjectMapper objectMapper;
+
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
@@ -39,12 +50,22 @@ class HappyPathIntegrationTest {
     @Test
     public void f() throws Exception {
     //  1. when I go to /songs then I can see no songs
-        mockMvc.perform(get("/songs")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.songs", empty()));
+//        mockMvc.perform(get("/songs")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.songs", empty()));
 
-    //  2. when I post to /song with Song "Till i collapse" then Song "Til i collapse" is returned with id 1
+        ResultActions perform = mockMvc.perform(get("/songs")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        MvcResult getSongsActionResult = perform.andExpect(status().isOk())
+                .andReturn();
+
+        String contentAsString = getSongsActionResult.getResponse().getContentAsString();
+        GetAllSongsResponseDto allSongsResponseDto = objectMapper.readValue(contentAsString, GetAllSongsResponseDto.class);
+        assertThat(allSongsResponseDto.songs()).isEmpty();
+
+        //  2. when I post to /song with Song "Till i collapse" then Song "Til i collapse" is returned with id 1
     //  3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
     //  4. when I go to /genre then I can see only default genre with id 1
     //  5. when I post to /genre with Genre "Rap" then Genre "Rap" is returned with id 2
