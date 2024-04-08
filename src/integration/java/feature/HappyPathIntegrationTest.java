@@ -2,8 +2,6 @@ package feature;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.songify.SongifyApplication;
-import com.songify.domain.crud.dto.SongDto;
-import com.songify.infrastructure.crud.song.controller.dto.response.GetAllSongsResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,17 +11,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,28 +45,33 @@ class HappyPathIntegrationTest {
     @Test
     public void f() throws Exception {
     //  1. when I go to /songs then I can see no songs
-//        mockMvc.perform(get("/songs")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.songs", empty()));
-
-        ResultActions perform = mockMvc.perform(get("/songs")
-                .contentType(MediaType.APPLICATION_JSON));
-
-        MvcResult getSongsActionResult = perform.andExpect(status().isOk())
-                .andReturn();
-
-        String contentAsString = getSongsActionResult.getResponse().getContentAsString();
-        GetAllSongsResponseDto allSongsResponseDto = objectMapper.readValue(contentAsString, GetAllSongsResponseDto.class);
-        assertThat(allSongsResponseDto.songs()).isEmpty();
-
-        //  2. when I post to /song with Song "Till i collapse" then Song "Til i collapse" is returned with id 1
-    //  3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
+        mockMvc.perform(get("/songs")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.songs", empty()));
+    //  2. when I post to /songs with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
+        mockMvc.perform(post("/songs")
+                .content("""
+                        {
+                          "name": "Till i collapse",
+                          "releaseDate": "2024-03-15T13:55:21.850Z",
+                          "duration": 0,
+                          "language": "ENGLISH"
+                        }
+                        """)
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.song.id", is(1)))
+        .andExpect(jsonPath("$.song.name", is("Till i collapse")))
+        .andExpect(jsonPath("$.song.genre.id", is(1)))
+        .andExpect(jsonPath("$.song.genre.name", is("default")));
+    //  3. when I post to /songs with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
     //  4. when I go to /genre then I can see only default genre with id 1
     //  5. when I post to /genre with Genre "Rap" then Genre "Rap" is returned with id 2
-    //  6. when I go to /song/1 then I can see default genre with id 1 and name default
-    //  7. when I put to /song/1/genre/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
-    //  8. when I go to /song/1 then I can see "Rap" genre
+    //  6. when I go to /songs/1 then I can see default genre with id 1 and name default
+    //  7. when I put to /songs/1/genre/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
+    //  8. when I go to /songs/1 then I can see "Rap" genre
     //  9. when I go to /albums then I can see no albums
     //  10. when I post to /albums with Album "EminemAlbum1" and Song with id 1 then Album "EminemAlbum1" is returned with id 1
     //  11. when I go to /albums/1 then I can not see any albums because there is no artist in system
