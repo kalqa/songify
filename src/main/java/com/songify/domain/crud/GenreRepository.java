@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 interface GenreRepository extends Repository<Genre, Long> {
 
@@ -15,4 +16,6 @@ interface GenreRepository extends Repository<Genre, Long> {
     Genre save(Genre genre);
 
     Optional<Genre> findById(Long id);
+
+    Set<Genre> findAll();
 }

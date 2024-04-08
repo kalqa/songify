@@ -28,6 +28,7 @@ public class SongifyCrudFacade {
     private final SongAdder songAdder;
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
+    private final GenreRetriever genreRetriever;
     private final AlbumAdder albumAdder;
     private final ArtistRetriever artistRetriever;
     private final AlbumRetriever albumRetriever;
@@ -134,6 +135,10 @@ public class SongifyCrudFacade {
 
     public Set<AlbumDto> findAllAlbums() {
         return albumRetriever.findAll();
+    }
+
+    public Set<GenreDto> retrieveGenres() {
+        return genreRetriever.findAll();
     }
 
 //    public void deleteSongAndGenreById(Long songId) {
