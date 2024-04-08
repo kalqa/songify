@@ -48,6 +48,24 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("should retrieve song with genre")
+    public void should_retrieve_song() {
+        // given
+        SongRequestDto song = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        // when
+        SongDto songDtoById = songifyCrudFacade.findSongDtoById(songDto.id());
+        // then
+        assertThat(songDtoById.genre().name()).isEqualTo("default");
+        assertThat(songDtoById.genre().id()).isEqualTo(1);
+        assertThat(songDtoById.id()).isEqualTo(0);
+        assertThat(songDtoById.name()).isEqualTo("song1");
+    }
+
+    @Test
     @DisplayName("Should add artist 'shawn mendes' with id:0 When shawn mendes was sent")
     public void should_add_artist_shawn_mendes_with_id_zero_when_shawn_mendes_was_sent() {
         // given
