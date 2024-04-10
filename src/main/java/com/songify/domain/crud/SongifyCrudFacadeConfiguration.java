@@ -35,7 +35,8 @@ class SongifyCrudFacadeConfiguration {
                 albumRetriever,
                 artistDeleter,
                 artistAssigner,
-                artistUpdater
+                artistUpdater,
+                genreAssigner
         );
     }
 }
