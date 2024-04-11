@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
+import java.util.Optional;
+import java.util.Set;
+
 interface GenreRepository extends Repository<Genre, Long> {
 
     @Modifying
@@ -11,4 +14,8 @@ interface GenreRepository extends Repository<Genre, Long> {
     int deleteById(Long id);
 
     Genre save(Genre genre);
+
+    Optional<Genre> findById(Long id);
+
+    Set<Genre> findAll();
 }
