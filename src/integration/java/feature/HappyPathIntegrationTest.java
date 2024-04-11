@@ -41,7 +41,7 @@ class HappyPathIntegrationTest {
     }
 
     @Test
-    public void f() throws Exception {
+    public void happy_path() throws Exception {
     //  1. when I go to /songs then I can see no songs
         mockMvc.perform(get("/songs")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -194,5 +194,4 @@ class HappyPathIntegrationTest {
                 .andExpect(jsonPath("$.songs[*].id", containsInAnyOrder(1, 2)))
                 .andExpect(jsonPath("$.artists[*].id", containsInAnyOrder(1)));
     }
-
 }
