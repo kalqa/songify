@@ -26,7 +26,15 @@ SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
 22. można wyświetlać konkretne gatunki muzyczne wraz z piosenkami
 23. można wyświetlać konkretnych artystów wraz z ich albumami
 24. chcemy mieć trwałe dane
-
+**25. SECURITY:**
+26. kazdy moze przegladac piosenki (gosc niezalogowany)
+27. jest podzial na 2 role: uzytkownik i admin
+28. zeby zostac uzytkownikiem trzeba sie zarejestrowac login/haslo  - GOOGLE
+29. admin jest tylko 1 i jego konto jest tworzone automatycznie przez system login: admin haslo: admin
+27. zapisujemy uzytkownika i admina do bazy danych (login i rola, repository mamy i userdetails zaimplementowane)
+26. uzytkownik moze wyswietlac piosenki, ale nie moze zarzadzac (w przyszlosci uzytkownik moze miec swoj profil, a tam "ulubione piosenki") - tylko READ
+27. tylko admin moze uzywac zmieniac stan aplikacji (usuwac, dodawac, edytowac) - READ, WRITE
+28. do autoryzacji uzytkownik musi uzywac tokena JWT (uzyskuje go po zalogowaniu) - GOOGLE
 
 HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)
 
