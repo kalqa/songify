@@ -27,14 +27,17 @@ SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
 23. można wyświetlać konkretnych artystów wraz z ich albumami
 24. chcemy mieć trwałe dane
 **25. SECURITY:**
-26. kazdy moze przegladac piosenki (gosc niezalogowany)
-27. jest podzial na 2 role: uzytkownik i admin
-28. zeby zostac uzytkownikiem trzeba sie zarejestrowac login/haslo  - GOOGLE
-29. admin jest tylko 1 i jego konto jest tworzone automatycznie przez system login: admin haslo: admin
-27. zapisujemy uzytkownika i admina do bazy danych (login i rola, repository mamy i userdetails zaimplementowane)
-26. uzytkownik moze wyswietlac piosenki, ale nie moze zarzadzac (w przyszlosci uzytkownik moze miec swoj profil, a tam "ulubione piosenki") - tylko READ
-27. tylko admin moze uzywac zmieniac stan aplikacji (usuwac, dodawac, edytowac) - READ, WRITE
-28. do autoryzacji uzytkownik musi uzywac tokena JWT (uzyskuje go po zalogowaniu) - GOOGLE
+26. Kazdy bez uwierzytelnienia (authentication) moze przegladac piosenki, albumy itp (gosc niezalogowany)~~
+27. Są 2 role: ROLE_USER i ROLE_ADMIN
+28. tylko admin moze przejrzec loginy i role uzytkownikow endpoint /users
+29. zeby zostac uzytkownikiem trzeba sie zarejestrowac login/haslo - wlasna implementacja i GOOGLE
+27. zapisujemy uzytkownika i admina do bazy danych (w przypadku wlasnej implementacji) - admin tworzony w migracji
+26. uzytkownik moze wyswietlac piosenki, ale nie moze zarzadzac (w przyszlosci uzytkownik moze miec swoj profil, a tam "ulubione piosenki") - ROLE_USER
+27. tylko admin moze zmieniac stan aplikacji (usuwac, dodawac, edytowac piosenki/albumy itp)
+28. W kolejnym etapie: uzywanie bezstanowego tokena JWT (uzyskuje go po zalogowaniu) - GOOGLE i wlasna implementacja authorization
+29. chcemy miec szyfrowanie HTTPS, certyfikat wygenerowany recznie openssl
+30. chcemy miec obsługe CORS - zapytania z domeny frontendowej
+31. chcemy zabezpiecznie CSRF bo bedzie frontend uzywany
 
 HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)
 
