@@ -9,6 +9,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -18,6 +19,7 @@ class UserDetailsServicePostgres implements UserDetailsManager {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserConformer userConformer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,17 +34,18 @@ class UserDetailsServicePostgres implements UserDetailsManager {
             System.out.println("not saved user - already exists");
             throw new RuntimeException("not saved user - already exists");
         }
-        usersRepository.save(
-                new User(
-                        user.getUsername(),
-                        passwordEncoder.encode(user.getPassword()),
-                        user.getAuthorities()
-                                .stream()
-                                .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.toList())
-                )
+        User createdUser = new User(
+                user.getUsername(),
+                passwordEncoder.encode(user.getPassword()),
+                UUID.randomUUID().toString(),
+                user.getAuthorities()
+                        .stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList())
         );
+        usersRepository.save(createdUser);
         System.out.println("saved user");
+        userConformer.sendConfirmationEmail(createdUser);
     }
 
     @Override

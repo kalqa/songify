@@ -84,6 +84,7 @@ class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/genres/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/genres/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
+                .requestMatchers("/users/confirm/**").permitAll()
                 .anyRequest().authenticated())
         ;
 //        http.httpBasic(c -> c.disable());
