@@ -19,7 +19,7 @@ class UserDetailsServicePostgres implements UserDetailsManager {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserConformer userConformer;
+//    private final UserConformer userConformer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,7 +45,7 @@ class UserDetailsServicePostgres implements UserDetailsManager {
         );
         usersRepository.save(createdUser);
         System.out.println("saved user");
-        userConformer.sendConfirmationEmail(createdUser);
+//        userConformer.sendConfirmationEmail(createdUser);
     }
 
     @Override

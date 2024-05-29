@@ -30,7 +30,7 @@ public class User extends BaseEntity {
 
     private String confirmationToken;
 
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     private Collection<String> authorities = new HashSet<>();
 
@@ -61,7 +61,7 @@ public class User extends BaseEntity {
     }
 
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 
     public User(String email, String password, String confirmationToken, Collection<String> authorities) {
