@@ -1,7 +1,9 @@
-package com.songify.domain.usercrud;
+package com.songify.infrastructure.security;
 
+import com.songify.domain.usercrud.User;
+import com.songify.domain.usercrud.UsersRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,13 +11,15 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
 @Transactional
-class UserDetailsServicePostgres implements UserDetailsManager {
+class UserDetailsServiceImpl implements UserDetailsManager {
+
+    public static final String DEFAULT_USER_ROLE = "ROLE_USER";
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
@@ -38,10 +42,7 @@ class UserDetailsServicePostgres implements UserDetailsManager {
                 user.getUsername(),
                 passwordEncoder.encode(user.getPassword()),
                 UUID.randomUUID().toString(),
-                user.getAuthorities()
-                        .stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList())
+                List.of(DEFAULT_USER_ROLE)
         );
         usersRepository.save(createdUser);
         System.out.println("saved user");
@@ -50,17 +51,17 @@ class UserDetailsServicePostgres implements UserDetailsManager {
 
     @Override
     public void updateUser(UserDetails user) {
-
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void deleteUser(String username) {
-
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void changePassword(String oldPassword, String newPassword) {
-
+        throw new NotImplementedException("TODO");
     }
 
     @Override

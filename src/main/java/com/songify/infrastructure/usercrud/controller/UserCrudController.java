@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
@@ -15,12 +18,11 @@ class UserCrudController {
     private final UserDetailsManager userDetailsManager;
 //    private final UserConformer userConformer;
 
-    @PostMapping
-    ResponseEntity<RegisterUserResponseDto> register(@RequestBody RegisterUserDto registerUserDto) {
+    @PostMapping("/register")
+    ResponseEntity<RegisterUserResponseDto> register(@RequestBody RegisterUserDto dto) {
         userDetailsManager.createUser(User.builder()
-                .username(registerUserDto.username())
-                .password(registerUserDto.password())
-                .roles("USER")
+                .username(dto.username())
+                .password(dto.password())
                 .build());
         return ResponseEntity.ok(new RegisterUserResponseDto("Created User"));
     }

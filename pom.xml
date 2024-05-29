@@ -17,6 +17,7 @@
     <properties>
         <java.version>17</java.version>
         <swagger.version>2.0.2</swagger.version>
+        <java-jwt.version>4.0.0</java-jwt.version>
     </properties>
 
     <dependencies>
@@ -98,6 +99,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <!-- JWT -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
         <!--        <dependency>-->
 <!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
 <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
@@ -117,7 +124,8 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
 

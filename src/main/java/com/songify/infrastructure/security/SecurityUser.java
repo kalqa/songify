@@ -1,12 +1,14 @@
-package com.songify.domain.usercrud;
+package com.songify.infrastructure.security;
 
+import com.songify.domain.usercrud.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
-class SecurityUser implements UserDetails {
+public class SecurityUser implements UserDetails {
 
     private final User user;
 
@@ -30,6 +32,10 @@ class SecurityUser implements UserDetails {
                 .stream()
                 .map(authority -> (GrantedAuthority) () -> authority)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> getAuthoritiesAsString() {
+        return user.getAuthorities().stream().toList();
     }
 
     @Override
