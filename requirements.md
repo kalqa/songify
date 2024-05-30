@@ -26,6 +26,19 @@ SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
 22. można wyświetlać konkretne gatunki muzyczne wraz z piosenkami
 23. można wyświetlać konkretnych artystów wraz z ich albumami
 24. chcemy mieć trwałe dane
+25. **25. SECURITY:**
+26. Kazdy bez uwierzytelnienia (authentication) moze przegladac piosenki, albumy itp (gosc niezalogowany)~~
+27. Są 2 role: ROLE_USER i ROLE_ADMIN
+28. Uzywanie bezstanowego tokena JWT (uzyskuje go po zalogowaniu) - wlasna implementacja authorization i potem oauth2 google
+28. tylko admin moze przejrzec loginy i role uzytkownikow endpoint /users
+29. zeby zostac uzytkownikiem trzeba sie zarejestrowac login/haslo - wlasna implementacja i GOOGLE
+27. zapisujemy uzytkownika i admina do bazy danych (w przypadku wlasnej implementacji) - admin tworzony w migracji flyway
+26. uzytkownik moze wyswietlac piosenki, ale nie moze zarzadzac (w przyszlosci uzytkownik moze miec swoj profil, a tam "ulubione piosenki") - ROLE_USER
+27. tylko admin moze zmieniac stan aplikacji (usuwac, dodawac, edytowac piosenki/albumy itp)
+29. chcemy miec szyfrowanie HTTPS, certyfikat wygenerowany recznie openssl
+30. chcemy miec obsługe CORS - zapytania z domeny frontendowej
+31. chcemy zabezpiecznie CSRF bo bedzie frontend uzywany
+32. jako bonus potwierdzenie e-maila po rejestracji
 
 
 HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)
