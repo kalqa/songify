@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.security.KeyPair;
+import java.security.interfaces.RSAPublicKey;
 import java.util.List;
 
 @Component
@@ -26,7 +28,8 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String ROLES_CLAIM_NAME = "roles";
 
-    private final JwtConfigurationProperties properties;
+//    private final JwtConfigurationProperties properties;
+    private final KeyPair keyPair;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -41,9 +44,9 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     }
 
     private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(String token) {
-        String secretKey = properties.secret();
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        JWTVerifier verifier = JWT.require(algorithm).build();
+//        String secretKey = properties.secret(); symmetric key IMPL
+//        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secretKey)).build(); // symmetric key IMPL
+        JWTVerifier verifier = JWT.require(Algorithm.RSA256((RSAPublicKey) keyPair.getPublic(), null)).build(); // asymmetric key IMPL
         DecodedJWT jwt = verifier.verify(token.substring(TOKEN_START_INDEX));
         List<SimpleGrantedAuthority> authorities = jwt.getClaim(ROLES_CLAIM_NAME)
                 .asList(String.class)
