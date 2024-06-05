@@ -14,7 +14,7 @@ import java.util.HashSet;
 @Getter
 @Setter
 @NoArgsConstructor
-class User extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "users_id_seq", strategy = GenerationType.SEQUENCE)
