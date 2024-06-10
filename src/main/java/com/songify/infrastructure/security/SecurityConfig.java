@@ -7,13 +7,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 @Configuration
 class SecurityConfig {
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository){
-        return new UserDetailsServiceImpl(userRepository);
+    public UserDetailsManager userDetailsService(UserRepository userRepository){
+        return new UserDetailsServiceImpl(userRepository, passwordEncoder());
     }
 
     @Bean
