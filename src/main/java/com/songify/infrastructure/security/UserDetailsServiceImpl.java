@@ -37,7 +37,7 @@ class UserDetailsServiceImpl implements UserDetailsManager {
         User createdUser = new User(
                 user.getUsername(),
                 encodedPassword,
-                false,
+                true,
                 List.of(DEFAULT_USER_ROLE)
         );
         User savedUser = userRepository.save(createdUser);
