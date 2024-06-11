@@ -31,8 +31,12 @@ class SecurityConfig {
         http.csrf(c -> c.disable());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
-        http.authorizeHttpRequests(authorize ->
-                authorize.anyRequest().authenticated());
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/users/register/**").permitAll()
+                .anyRequest().authenticated());
         return http.build();
     }
 }
