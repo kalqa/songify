@@ -31,6 +31,8 @@ class SecurityConfig {
         http.csrf(c -> c.disable());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
+        http.authorizeHttpRequests(authorize ->
+                authorize.anyRequest().authenticated());
         return http.build();
     }
 }
