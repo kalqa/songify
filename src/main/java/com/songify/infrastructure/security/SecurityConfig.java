@@ -41,6 +41,18 @@ class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/albums/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/genres/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/songs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH, "/songs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/songs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/songs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/artists/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH, "/artists/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/artists/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/artists/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/albums/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/albums/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/genres/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated());
         return http.build();
     }
