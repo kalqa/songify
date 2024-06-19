@@ -43,6 +43,7 @@ class SecurityConfig {
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/users/register/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/token/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/albums/**").permitAll()
