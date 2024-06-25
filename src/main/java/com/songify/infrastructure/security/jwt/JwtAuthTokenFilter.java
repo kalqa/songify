@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,14 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorization = request.getHeader("Authorization");
-        if (authorization == null) {
+//        String authorization = request.getHeader("Authorization");
+//        if (authorization == null) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+
+        String token = getTokenFromRequest(request);
+        if (token == null) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -40,7 +47,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
                 .build();
 //        String secret = properties.secret(); SYMMETRIC KEY APPROACH
 //        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(secret)).build();
-        String token = authorization.substring(7);
+//        String token = authorization.substring(7);
         DecodedJWT decodedToken = jwtVerifier.verify(token);
         String login = decodedToken.getSubject();
         List<SimpleGrantedAuthority> roles = decodedToken.getClaim("roles")
@@ -51,5 +58,22 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(login, null, roles);
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         filterChain.doFilter(request, response);
+    }
+
+    private String getTokenFromRequest(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7);
+        }
+
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("accessToken".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+
+        return null;
     }
 }

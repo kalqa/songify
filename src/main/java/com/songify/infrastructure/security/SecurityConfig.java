@@ -54,7 +54,7 @@ class SecurityConfig {
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/users/register/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/token/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/songs/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/albums/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/genres/**").permitAll()
@@ -83,6 +83,7 @@ class SecurityConfig {
                 config.setAllowedMethods(
                         List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
                 config.setAllowedHeaders(List.of("*"));
+                config.setAllowCredentials(true);
                 return config;
             };
             c.configurationSource(source);
