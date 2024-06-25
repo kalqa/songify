@@ -22,7 +22,7 @@ class JwtTokenController {
         String token = tokenGenerator.authenticateAndGenerateToken(dto.username(), dto.password());
         Cookie cookie = new Cookie("accessToken", token);
         cookie.setHttpOnly(true);
-        cookie.setSecure(false); // Ensure the cookie is only sent over HTTPS
+        cookie.setSecure(true); // Ensure the cookie is only sent over HTTPS
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60); // 1 hour
         response.addCookie(cookie);
