@@ -1,6 +1,7 @@
 package com.songify.infrastructure.security;
 
 import com.songify.domain.usercrud.UserRepository;
+import com.songify.infrastructure.security.jwt.JwtAuthConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,16 +42,19 @@ class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationSuccessHandler successHandler, CustomOidcUserService customOidcUserService) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationSuccessHandler successHandler, JwtAuthConverter converter, CookieTokenResolver resolver) throws Exception {
         http.csrf(c -> c.disable());
         http.cors(corsConfigurerCustomizer());
         http.formLogin(c -> c.disable());
         http.httpBasic(c -> c.disable());
-        http.oauth2Login(c -> c.successHandler(successHandler)
-                .userInfoEndpoint(userinfo -> userinfo.oidcUserService(
-                        customOidcUserService
-                )));
-//        http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.oauth2Login(c -> c.successHandler(successHandler));
+        http.oauth2ResourceServer(c -> c.jwt(jwt -> jwt.jwtAuthenticationConverter(converter))
+                .bearerTokenResolver(resolver));
+//        http.oauth2Login(c -> c.successHandler(successHandler)
+//                .userInfoEndpoint(userinfo -> userinfo.oidcUserService(
+//                        customOidcUserService
+//                )));
+        http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers("/swagger-resources/**").permitAll()
