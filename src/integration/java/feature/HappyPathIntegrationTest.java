@@ -49,14 +49,32 @@ class HappyPathIntegrationTest {
 
     @Test
     public void happy_path() throws Exception {
-    //  1. when I go to /songs then I can see no songs
+    //  1. when I go to /songs without jwt then I can see no songs
         mockMvc.perform(get("/songs")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.songs", empty()));
+
+    //  SECURITY STEP when I go to /songs with jwt token then I can see no songs
+    mockMvc.perform(get("/songs")
+                    .with(jwt())
+                    .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.songs", empty()));
+
+
+    //  SECURITY STEP when I post to /songs without jwt with Song "Till i collapse" then 401 Unauthorized is returned
+        mockMvc.perform(post("/songs"))
+                .andExpect(status().isUnauthorized());
+
+    //  SECURITY STEP when I post to /songs as role user with Song then 403 Forbidden is returned
+        mockMvc.perform(post("/songs")
+                        .with(authentication(createJwtWithUserRole())))
+                .andExpect(status().isForbidden());
+
     //  2. when I post to /songs with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
         mockMvc.perform(post("/songs")
-                .with(authentication(createJwt()))
+                .with(authentication(createJwtWithAdminRole()))
                 .content("""
                         {
                           "name": "Till i collapse",
@@ -74,6 +92,7 @@ class HappyPathIntegrationTest {
         .andExpect(jsonPath("$.song.genre.name", is("default")));
     //  3. when I post to /songs with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
         mockMvc.perform(post("/songs")
+                .with(authentication(createJwtWithAdminRole()))
                 .content("""
                         {
                           "name": "Lose Yourself",
@@ -98,6 +117,7 @@ class HappyPathIntegrationTest {
         ;
     //  5. when I post to /genres with Genre "Rap" then Genre "Rap" is returned with id 2
         mockMvc.perform(post("/genres")
+                    .with(authentication(createJwtWithAdminRole()))
                 .content("""
                         {
                           "name": "Rap"
@@ -120,6 +140,7 @@ class HappyPathIntegrationTest {
 
     //  7. when I put to /songs/1/genres/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
         mockMvc.perform(put("/songs/1/genres/2")
+                        .with(authentication(createJwtWithAdminRole()))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$", is("updated")));
@@ -141,6 +162,7 @@ class HappyPathIntegrationTest {
 
     //  10. when I post to /albums with Album "EminemAlbum1" and Song with id 1 then Album "EminemAlbum1" is returned with id 1
         mockMvc.perform(post("/albums")
+                        .with(authentication(createJwtWithAdminRole()))
                         .content("""
                                 {
                                   "title": "EminemAlbum1",
@@ -164,6 +186,7 @@ class HappyPathIntegrationTest {
 
     //  12. when I post to /artists with Artist "Eminem" then Artist "Eminem" is returned with id 1
         mockMvc.perform(post("/artists")
+                        .with(authentication(createJwtWithAdminRole()))
                 .content("""
                         {
                           "name": "Eminem"
@@ -176,6 +199,7 @@ class HappyPathIntegrationTest {
             .andExpect(jsonPath("$.name", is("Eminem")));
     //  13. when I put to /artists/1/albums/1 then Artist with id 1 ("Eminem") is added to Album with id 1 ("EminemAlbum1")
         mockMvc.perform(put("/artists/1/albums/1")
+                        .with(authentication(createJwtWithAdminRole()))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         )
                 .andExpect(status().isOk())
@@ -189,6 +213,7 @@ class HappyPathIntegrationTest {
 
     //  15. when I put to /albums/1/songs/2 then Song with id 2 ("Lose Yourself") is added to Album with id 1 ("EminemAlbum1")
         mockMvc.perform(put("/albums/1/songs/2")
+                        .with(authentication(createJwtWithAdminRole()))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id", is(1)))
@@ -203,9 +228,17 @@ class HappyPathIntegrationTest {
                 .andExpect(jsonPath("$.artists[*].id", containsInAnyOrder(1)));
     }
 
-    private JwtAuthenticationToken createJwt() {
+    private JwtAuthenticationToken createJwtWithAdminRole() {
         Jwt jwt = Jwt.withTokenValue("123")
                 .claim("email", "bartlomiejkalqa@gmail.com")
+                .header("alg", "none")
+                .build();
+        return jwtAuthConverter.convert(jwt);
+    }
+
+    private JwtAuthenticationToken createJwtWithUserRole() {
+        Jwt jwt = Jwt.withTokenValue("123")
+                .claim("email", "john@gmail.com")
                 .header("alg", "none")
                 .build();
         return jwtAuthConverter.convert(jwt);
