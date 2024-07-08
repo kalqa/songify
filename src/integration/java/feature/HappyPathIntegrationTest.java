@@ -16,6 +16,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.hamcrest.Matchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,6 +50,7 @@ class HappyPathIntegrationTest {
                 .andExpect(jsonPath("$.songs", empty()));
     //  2. when I post to /songs with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
         mockMvc.perform(post("/songs")
+                .with(jwt().authorities(() -> "ROLE_ADMIN"))
                 .content("""
                         {
                           "name": "Till i collapse",

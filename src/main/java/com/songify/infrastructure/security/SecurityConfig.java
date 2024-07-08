@@ -60,7 +60,7 @@ class SecurityConfig {
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/users/register/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/songs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/message").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/albums/**").permitAll()
